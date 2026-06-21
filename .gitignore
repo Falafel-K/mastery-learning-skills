@@ -1,0 +1,33 @@
+# Python
+__pycache__/
+*.py[cod]
+.pytest_cache/
+.coverage
+
+# Virtual environments
+.venv/
+venv/
+
+# OS and editor files
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/
+
+# Obsidian local state and private learning data
+.obsidian/workspace*.json
+.obsidian/cache
+学习/
+Learning/
+*.vault-backup/
+
+# Secrets
+.env
+.env.*
+*.pem
+*.key
+
+# Build artifacts
+*.zip
+build/
+dist/
