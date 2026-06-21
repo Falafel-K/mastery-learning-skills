@@ -108,5 +108,9 @@ fi
 
 echo ""
 echo "Successfully installed Mastery Learning Skills!"
+echo "Four Pillars Architecture active:"
+echo "  - Vocabulary aligned via CONTEXT.md in project root."
+echo "  - User/Model invocation triggers mapped (see docs/invocation.md)."
+echo "  - Soft degradation storage rules defined (see docs/adr/0001-mastery-storage-soft-degradation.md)."
 echo "You can now use these skills in your Agent workspace."
 echo "----------------------------------------"

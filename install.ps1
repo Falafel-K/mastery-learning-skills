@@ -121,5 +121,9 @@ if ($LocalMode) {
 
 Write-Host ""
 Write-Host "Successfully installed Mastery Learning Skills!"
+Write-Host "Four Pillars Architecture active:"
+Write-Host "  - Vocabulary aligned via CONTEXT.md in project root."
+Write-Host "  - User/Model invocation triggers mapped (see docs/invocation.md)."
+Write-Host "  - Soft degradation storage rules defined (see docs/adr/0001-mastery-storage-soft-degradation.md)."
 Write-Host "You can now use these skills in your Agent workspace."
 Write-Host "----------------------------------------"

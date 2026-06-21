@@ -1,6 +1,6 @@
 ---
 name: skill-scaffolder
-description: Scaffold a new agent skill based on user requirements. Use when the user requests to create, scaffold, or generate a new Agent Skill, or enters the /create-skill command.
+description: 自动化生成具备四大支柱（触发范式、降级容错、术语对齐、调试生态）的技能包结构。(Automated generator for scaffolding agent skills complying with the Four Pillars of skill architecture.)
 license: MIT
 compatibility: Markdown-capable agent; local filesystem access for skill folder generation.
 ---
@@ -31,9 +31,11 @@ When the user enters `/create-skill` or requests a new skill:
 
 1. **Sanitize Skill Name**: Convert the target skill name to lowercase, dash-separated folder format (e.g. `git-guardrails`).
 2. **Create Folders and Base Templates Natively**: Use your native filesystem tools (like write, make directory, etc.) to create the folder `skills/<slugified-name>/` and create the base file `skills/<slugified-name>/SKILL.md` using the template layout defined in step 3. Do not run any external Python helper scripts to do this.
-3. **Draft the Skill Instructions**: Write the detailed instructions inside the newly created `skills/<slugified-name>/SKILL.md` file:
-   - Include clear frontmatter (name, description, license, compatibility).
-   - Define checkable, exhaustive **Completion Criteria** at the end of each step.
+3. **Draft the Skill Instructions**: Write the detailed instructions inside the newly created `skills/<slugified-name>/SKILL.md` file, strictly enforcing the **Four Pillars**:
+   - **Pillar 1 (Invocation)**: Define clearly in YAML frontmatter whether it is User-invoked (`disable-model-invocation: true` for commands like `/my-cmd`) or Model-invoked (omit for autonomous trigger).
+   - **Pillar 2 (Degradation)**: Specify operating modes (Full Mode, Cloud Mode, Chat-only Mode) with fallback behaviors for writes and dependencies (e.g. referencing `../../docs/adr/0001-mastery-storage-soft-degradation.md`).
+   - **Pillar 3 (Vocabulary)**: Include a required step to load the shared vocabulary in `../../CONTEXT.md` to avoid term mismatch.
+   - **Pillar 4 (Checkability)**: Define checkable, exhaustive **Completion Criteria** at the end of each step.
    - Separate ordered actions (steps) from static rules (reference).
 4. **Auto-Run Validation (AI Self-Testing)**:
    - Run the local package validator on the new skill:

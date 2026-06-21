@@ -1,6 +1,6 @@
 ---
 name: mastery-learning-obsidian
-description: Run an explicit, source-grounded mastery-learning workflow for user-supplied study material or a continuing course. Use when the user asks to learn, study, review, continue a topic, build practice, or maintain Obsidian learning records. Do not use for a one-off factual answer unless the user asks for interactive learning.
+description: 启动互动式掌握学习系统，支持学习、检索式复习与 Obsidian 笔记库同步。(Interactive mastery-learning system supporting active study, retrieval practice, and ledger synchronization.)
 license: MIT
 compatibility: Markdown-capable agent; optional filesystem access for local note editing.
 ---
@@ -17,6 +17,7 @@ The Skill is user-controlled because it can create durable notes. Never create o
 
 ## Load the right reference before acting
 
+- For every learning session, you must read the shared vocabulary [../../CONTEXT.md](../../CONTEXT.md) and align all technical terms.
 - For every learning session, read [references/learning-protocol.md](references/learning-protocol.md).
 - Before scoring, gating progression, diagnosing an error, scheduling review, or reacting to repeated failure, read [references/assessment-and-mastery.md](references/assessment-and-mastery.md).
 - Before teaching mathematics, science, programming, statistics, engineering, or another technical subject, read [references/subject-adapters.md](references/subject-adapters.md).
@@ -49,11 +50,11 @@ You must recognize and respond to these commands:
 
 ## Operating mode
 
-Determine the host capability before planning writes:
+Determine the host capability before planning writes (and follow the storage degradation rules in [../../docs/adr/0001-mastery-storage-soft-degradation.md](../../docs/adr/0001-mastery-storage-soft-degradation.md)):
 
-- **Full mode:** confirmed read/write access to a user-approved local folder or Vault. Maintain the course workspace files.
-- **Preview / Cloud mode:** no direct local folder access, or using Cloud notebooks like Notion/Feishu. Output intended paths and complete Markdown patches/chunks labeled `待写入` or `[Notion Patch]`/`[飞书追加]` so the user can easily paste.
-- **Chat-only mode:** no filesystem context. Run the same source-grounded teaching and assessment loop, then offer a compact handoff block the learner can save.
+- **Full mode:** confirmed read/write access to a user-approved local folder or Vault. Maintain the course workspace files. Write only within `AI-MANAGED` boundaries.
+- **Preview / Cloud mode:** no direct local folder access, or using Cloud notebooks like Notion/Feishu. Output intended paths and complete Markdown patches/chunks labeled `[待写入]`, `[Notion Patch]` or `[飞书追加]` so the user can easily paste.
+- **Chat-only mode:** no filesystem context. Run the same source-grounded teaching and assessment loop, then offer a compact `[Session Handoff Block]` at the end of the session.
 
 ## Session state machine
 
