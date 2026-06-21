@@ -10,26 +10,45 @@ This package enforces **deliberate practice**, **evidence-based progression gate
 
 ## Quickstart (30-second setup)
 
-1. **One-Line Online Installation (Recommended, no Git required)**:
-   Copy and run the appropriate command for your system in your terminal:
-   - **macOS / Linux**:
-     ```bash
-     curl -fsSL https://raw.githubusercontent.com/Falafel-K/mastery-learning-skills/main/install.sh | bash
-     ```
-   - **Windows (PowerShell)**:
-     ```powershell
-     irm https://raw.githubusercontent.com/Falafel-K/mastery-learning-skills/main/install.ps1 | iex
-     ```
-2. **Local Developer Installation (Clone & Symlink)**:
-   Clone the repository and run the local installer to create live developer symlinks:
-   ```bash
-   git clone https://github.com/Falafel-K/mastery-learning-skills.git
-   cd mastery-learning-skills
-   ```
-   Then run the installer:
-   - **macOS/Linux**: `chmod +x install.sh && ./install.sh`
-   - **Windows (PowerShell)**: `.\install.ps1`
-3. Start a deliberate learning session by pasting your study material:
+The installer automatically detects active agent environments on your system and links/copies the skills to all of them:
+- **Google Gemini / Antigravity**: `~/.gemini/config/skills`
+- **Claude Code**: `~/.claude/skills`
+- **General Fallback / Codex**: `~/.agents/skills`
+
+### 1. One-Line Online Installation (Recommended, no Git required)
+Copy and run the appropriate command for your system in your terminal:
+- **macOS / Linux**:
+  ```bash
+  curl -fsSL https://raw.githubusercontent.com/Falafel-K/mastery-learning-skills/main/install.sh | bash
+  ```
+- **Windows (PowerShell)**:
+  ```powershell
+  irm https://raw.githubusercontent.com/Falafel-K/mastery-learning-skills/main/install.ps1 | iex
+  ```
+
+### 2. One-Click Uninstall (Clean removal of skills)
+To completely remove the skills and clean up the directories:
+- **macOS / Linux**:
+  ```bash
+  curl -fsSL https://raw.githubusercontent.com/Falafel-K/mastery-learning-skills/main/install.sh | bash -s -- --uninstall
+  ```
+- **Windows (PowerShell)**:
+  ```powershell
+  & ([scriptblock]::Create((irm https://raw.githubusercontent.com/Falafel-K/mastery-learning-skills/main/install.ps1))) -Uninstall
+  ```
+
+### 3. Local Developer Installation (Clone & Symlink)
+Clone the repository and run the local installer to create live developer symlinks:
+```bash
+git clone https://github.com/Falafel-K/mastery-learning-skills.git
+cd mastery-learning-skills
+```
+Then run the installer:
+- **macOS/Linux**: `chmod +x install.sh && ./install.sh` (Uninstall: `./install.sh --uninstall`)
+- **Windows (PowerShell)**: `.\install.ps1` (Uninstall: `.\install.ps1 -Uninstall`)
+
+### 4. Start Learning
+Start a deliberate learning session by pasting your study material in your agent chat:
 
 ```text
 Use mastery-learning-obsidian to learn from the material below:
@@ -37,7 +56,7 @@ Use mastery-learning-obsidian to learn from the material below:
 [Paste material here]
 ```
 
-4. If you want filesystem-backed Obsidian notes, provide a Vault path. Otherwise, the skill runs in **Preview mode** and outputs copy-pasteable Markdown.
+If you want filesystem-backed Obsidian notes, provide a Vault path. Otherwise, the skill runs in **Preview mode** and outputs copy-pasteable Markdown.
 
 ---
 

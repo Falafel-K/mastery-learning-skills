@@ -10,7 +10,12 @@
 
 ## 快速开始（30秒上手）
 
-### 在线一键安装 (无需克隆)
+安装脚本会自动识别你系统上已激活的 Agent 环境，并将技能一键安装/链接到它们之中：
+- **Google Gemini / Antigravity**：`~/.gemini/config/skills`
+- **Claude Code**：`~/.claude/skills`
+- **通用 / Codex / 备用路径**：`~/.agents/skills`
+
+### 1. 在线一键安装 (无需克隆)
 在终端中复制并运行以下对应系统的命令：
 - **macOS / Linux**:
   ```bash
@@ -21,16 +26,29 @@
   irm https://raw.githubusercontent.com/Falafel-K/mastery-learning-skills/main/install.ps1 | iex
   ```
 
-### 本地克隆安装 (方便开发调试)
+### 2. 一键卸载清理 (干净清除全部技能指令)
+如需彻底卸载本技能包并清理配置目录，请执行以下命令：
+- **macOS / Linux**:
+  ```bash
+  curl -fsSL https://raw.githubusercontent.com/Falafel-K/mastery-learning-skills/main/install.sh | bash -s -- --uninstall
+  ```
+- **Windows (PowerShell)**:
+  ```powershell
+  & ([scriptblock]::Create((irm https://raw.githubusercontent.com/Falafel-K/mastery-learning-skills/main/install.ps1))) -Uninstall
+  ```
+
+### 3. 本地克隆安装 (方便开发调试)
 克隆本仓库并在本地运行安装脚本以创建实时生效的软链接：
 ```bash
 git clone https://github.com/Falafel-K/mastery-learning-skills.git
 cd mastery-learning-skills
 ```
 然后运行安装脚本：
-- **macOS/Linux**: `chmod +x install.sh && ./install.sh`
-- **Windows (PowerShell)**: `.\install.ps1`
-3. 粘贴你的学习资料，直接开启刻意学习会话：
+- **macOS/Linux**: `chmod +x install.sh && ./install.sh` (卸载: `./install.sh --uninstall`)
+- **Windows (PowerShell)**: `.\install.ps1` (卸载: `.\install.ps1 -Uninstall`)
+
+### 4. 开启学习会话
+在 Agent 会话中粘贴你的学习资料，直接开启刻意学习：
 
 ```text
 Use mastery-learning-obsidian to learn from the material below:
@@ -38,7 +56,7 @@ Use mastery-learning-obsidian to learn from the material below:
 [在此粘贴你的学习资料]
 ```
 
-4. 如果你想将笔记自动同步到本地，请提供你的 Obsidian Vault 绝对路径。否则，插件将自动退级运行在 **Preview 预览模式**，并为你输出完整、可复制的 Markdown 内容。
+如果你想将笔记自动同步到本地，请提供你的 Obsidian Vault 绝对路径。否则，插件将自动退级运行在 **Preview 预览模式**，并为你输出完整、可复制的 Markdown 内容。
 
 ---
 

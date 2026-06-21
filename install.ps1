@@ -1,17 +1,56 @@
 # Windows PowerShell installer to link or download Mastery Learning Skills packages.
 
 param (
-    [string]$Dest = "$Home\.agents\skills",
+    [string]$Dest,
+    [switch]$Uninstall,
     [switch]$Help
 )
 
 if ($Help) {
-    Write-Host "Usage: .\install.ps1 [-Dest <TargetDirectory>]"
+    Write-Host "Usage: .\install.ps1 [-Dest <TargetDirectory>] [-Uninstall]"
     Write-Host ""
     Write-Host "Options:"
-    Write-Host "  -Dest <dir>    Set the target destination directory (default: $Home\.agents\skills)"
+    Write-Host "  -Dest <dir>    Set the target destination directory (default: auto-detected)"
+    Write-Host "  -Uninstall     Uninstall/remove Mastery Learning Skills from target/detected directories"
     Write-Host "  -Help          Show this help message"
     exit
+}
+
+$Skills = @("mastery-learning-obsidian", "skill-scaffolder")
+
+# Auto-detect target paths if -Dest is not specified
+$TargetPaths = @()
+if ([string]::IsNullOrEmpty($Dest)) {
+    $FoundAny = $false
+    
+    # 1. Gemini / Antigravity (Google Agents)
+    $GeminiDir = Join-Path $Home ".gemini\config"
+    if (Test-Path -Path $GeminiDir) {
+        $TargetPaths += Join-Path $GeminiDir "skills"
+        $FoundAny = $true
+    }
+    
+    # 2. Claude Code
+    $ClaudeDir = Join-Path $Home ".claude"
+    if (Test-Path -Path $ClaudeDir) {
+        $TargetPaths += Join-Path $ClaudeDir "skills"
+        $FoundAny = $true
+    }
+    
+    # 3. Legacy / Codex / General agents (include old path for cleanup/compatibility)
+    $AgentsDir = Join-Path $Home ".agents"
+    if (Test-Path -Path $AgentsDir) {
+        $TargetPaths += Join-Path $AgentsDir "skills"
+        $FoundAny = $true
+    }
+    
+    # Fallback if none exist
+    if (-not $FoundAny) {
+        $TargetPaths += Join-Path $Home ".gemini\config\skills"
+        $TargetPaths += Join-Path $Home ".agents\skills"
+    }
+} else {
+    $TargetPaths += $Dest
 }
 
 # Determine if running in online piped mode or local mode
@@ -20,18 +59,47 @@ if ([string]::IsNullOrEmpty($PSScriptRoot) -or -not (Test-Path -Path (Join-Path 
     $LocalMode = $false
 }
 
+if ($Uninstall) {
+    Write-Host "----------------------------------------"
+    Write-Host "Mastery Learning Skills Windows Uninstaller"
+    Write-Host "----------------------------------------"
+    
+    foreach ($Target in $TargetPaths) {
+        Write-Host "Checking target directory: $Target"
+        if (Test-Path -Path $Target) {
+            foreach ($Skill in $Skills) {
+                $SkillDest = Join-Path $Target $Skill
+                if (Test-Path -Path $SkillDest) {
+                    Write-Host "Removing: $SkillDest"
+                    $Item = Get-Item $SkillDest
+                    if ($Item.Attributes -match "ReparsePoint") {
+                        [System.IO.Directory]::Delete($SkillDest)
+                    } else {
+                        Remove-Item -Path $SkillDest -Recurse -Force
+                    }
+                }
+            }
+            # Clean up empty parent directory if it contains no other files/folders
+            $Remaining = Get-ChildItem -Path $Target -ErrorAction SilentlyContinue
+            if ($null -eq $Remaining -or @($Remaining).Count -eq 0) {
+                Write-Host "Removing empty parent directory: $Target"
+                Remove-Item -Path $Target -Force
+            }
+        }
+    }
+    
+    Write-Host ""
+    Write-Host "Successfully uninstalled Mastery Learning Skills!"
+    Write-Host "All configured links and folders have been cleared."
+    Write-Host "----------------------------------------"
+    exit 0
+}
+
 Write-Host "----------------------------------------"
 Write-Host "Mastery Learning Skills Windows Installer"
 Write-Host "----------------------------------------"
-Write-Host "Target directory: $Dest"
-
-$Skills = @("mastery-learning-obsidian", "skill-scaffolder")
-
-# Ensure target directory exists
-if (-not (Test-Path -Path $Dest)) {
-    Write-Host "Creating directory: $Dest"
-    New-Item -ItemType Directory -Path $Dest -Force | Out-Null
-}
+Write-Host "Target directories: $($TargetPaths -join ', ')"
+Write-Host ""
 
 if ($LocalMode) {
     $SrcDir = $PSScriptRoot
@@ -39,27 +107,35 @@ if ($LocalMode) {
     Write-Host "Source directory: $SrcDir"
     Write-Host ""
 
-    foreach ($Skill in $Skills) {
-        $SkillSrc = Join-Path $SrcDir "skills\$Skill"
-        $SkillDest = Join-Path $Dest $Skill
+    foreach ($Target in $TargetPaths) {
+        # Ensure target directory exists
+        if (-not (Test-Path -Path $Target)) {
+            Write-Host "Creating directory: $Target"
+            New-Item -ItemType Directory -Path $Target -Force | Out-Null
+        }
 
-        if (Test-Path -Path $SkillSrc) {
-            Write-Host "Linking: $Skill -> $SkillDest"
-            
-            # Remove existing symlink or folder at destination
-            if (Test-Path -Path $SkillDest) {
-                $Item = Get-Item $SkillDest
-                if ($Item.Attributes -match "ReparsePoint") {
-                    [System.IO.Directory]::Delete($SkillDest)
-                } else {
-                    Remove-Item -Path $SkillDest -Recurse -Force
+        foreach ($Skill in $Skills) {
+            $SkillSrc = Join-Path $SrcDir "skills\$Skill"
+            $SkillDest = Join-Path $Target $Skill
+
+            if (Test-Path -Path $SkillSrc) {
+                Write-Host "Linking: $Skill -> $SkillDest"
+                
+                # Remove existing symlink or folder at destination
+                if (Test-Path -Path $SkillDest) {
+                    $Item = Get-Item $SkillDest
+                    if ($Item.Attributes -match "ReparsePoint") {
+                        [System.IO.Directory]::Delete($SkillDest)
+                    } else {
+                        Remove-Item -Path $SkillDest -Recurse -Force
+                    }
                 }
+                
+                # Create junction (no admin elevation required on Windows)
+                New-Item -ItemType Junction -Path $SkillDest -Target $SkillSrc -Force | Out-Null
+            } else {
+                Write-Warning "Source skill package not found at $SkillSrc"
             }
-            
-            # Create symbolic link
-            New-Item -ItemType SymbolicLink -Path $SkillDest -Target $SkillSrc -Force | Out-Null
-        } else {
-            Write-Warning "Source skill package not found at $SkillSrc"
         }
     }
 } else {
@@ -94,24 +170,33 @@ if ($LocalMode) {
     }
     
     $ExtractedFolder = Join-Path $TempFolder "mastery-learning-skills-main"
-    foreach ($Skill in $Skills) {
-        $SkillSrc = Join-Path $ExtractedFolder "skills\$Skill"
-        $SkillDest = Join-Path $Dest $Skill
-        
-        if (Test-Path -Path $SkillSrc) {
-            Write-Host "Copying: $Skill -> $SkillDest"
-            if (Test-Path -Path $SkillDest) {
-                # Check for link vs folder to delete safely
-                $Item = Get-Item $SkillDest
-                if ($Item.Attributes -match "ReparsePoint") {
-                    [System.IO.Directory]::Delete($SkillDest)
-                } else {
-                    Remove-Item -Path $SkillDest -Recurse -Force
+    
+    foreach ($Target in $TargetPaths) {
+        # Ensure target directory exists
+        if (-not (Test-Path -Path $Target)) {
+            Write-Host "Creating directory: $Target"
+            New-Item -ItemType Directory -Path $Target -Force | Out-Null
+        }
+
+        foreach ($Skill in $Skills) {
+            $SkillSrc = Join-Path $ExtractedFolder "skills\$Skill"
+            $SkillDest = Join-Path $Target $Skill
+            
+            if (Test-Path -Path $SkillSrc) {
+                Write-Host "Copying: $Skill -> $SkillDest"
+                if (Test-Path -Path $SkillDest) {
+                    # Check for link vs folder to delete safely
+                    $Item = Get-Item $SkillDest
+                    if ($Item.Attributes -match "ReparsePoint") {
+                        [System.IO.Directory]::Delete($SkillDest)
+                    } else {
+                        Remove-Item -Path $SkillDest -Recurse -Force
+                    }
                 }
+                Copy-Item -Path $SkillSrc -Destination $SkillDest -Recurse -Force
+            } else {
+                Write-Warning "Package $Skill not found in downloaded archive."
             }
-            Copy-Item -Path $SkillSrc -Destination $SkillDest -Recurse -Force
-        } else {
-            Write-Warning "Package $Skill not found in downloaded archive."
         }
     }
     
