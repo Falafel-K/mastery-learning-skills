@@ -2,7 +2,7 @@
 name: mastery-learning-obsidian
 description: Run an explicit, source-grounded mastery-learning workflow for user-supplied study material or a continuing course. Use when the user asks to learn, study, review, continue a topic, build practice, or maintain Obsidian learning records. Do not use for a one-off factual answer unless the user asks for interactive learning.
 license: MIT
-compatibility: Markdown-capable agent; optional filesystem access for Obsidian synchronization and optional Python for local helpers.
+compatibility: Markdown-capable agent; optional filesystem access for local note editing.
 ---
 
 # Mastery Learning & Universal Storage
@@ -44,8 +44,8 @@ You must recognize and respond to these commands:
 - `/review [target]` — Review loop. If `[target]` is provided (e.g. `K01`), immediately start a retrieval-practice review for that specific knowledge point. If no target is provided, start a review for all overdue points in the queue.
 - `/audit` — Perform a coverage audit: check if all important source material is mapped to knowledge points and has been assessed.
 - `/handoff` — Compact the active session state into a handoff block for another agent or session.
-- `/sync` — Manually trigger the local python `sync_course.py` helper script to synchronize the current learning state to the local workspace.
-- `/dashboard` — Manually trigger the local python `generate_dashboard.py` helper script to show a visual mastery progress report in the terminal.
+- `/sync` — Synchronize the current learning state from the session log to the mastery ledger by directly editing the local files natively.
+- `/dashboard` — Display a visual mastery progress report (including an ASCII progress bar and status counts) directly in the chat output window by reading the local ledger file natively.
 
 ## Operating mode
 

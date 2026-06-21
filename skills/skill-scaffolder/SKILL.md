@@ -30,13 +30,7 @@ When the user enters `/create-skill` or requests a new skill:
 ## Scaffolding Steps
 
 1. **Sanitize Skill Name**: Convert the target skill name to lowercase, dash-separated folder format (e.g. `git-guardrails`).
-2. **Execute Scaffolder Helper**: Invoke the local Python script to create the folder structure and write the template:
-   ```bash
-   python skills/skill-scaffolder/scripts/scaffold_skill.py \
-     --name "<slugified-name>" \
-     --description "<trigger-description>" \
-     --commands '<json-list-of-commands>'
-   ```
+2. **Create Folders and Base Templates Natively**: Use your native filesystem tools (like write, make directory, etc.) to create the folder `skills/<slugified-name>/` and create the base file `skills/<slugified-name>/SKILL.md` using the template layout defined in step 3. Do not run any external Python helper scripts to do this.
 3. **Draft the Skill Instructions**: Write the detailed instructions inside the newly created `skills/<slugified-name>/SKILL.md` file:
    - Include clear frontmatter (name, description, license, compatibility).
    - Define checkable, exhaustive **Completion Criteria** at the end of each step.

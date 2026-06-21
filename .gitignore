@@ -31,3 +31,7 @@ Learning/
 *.zip
 build/
 dist/
+
+# Development tools and tests (ignored for pure GitHub repo)
+tools/
+tests/
