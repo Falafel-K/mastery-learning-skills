@@ -7,8 +7,8 @@ import unittest
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
-CREATE = ROOT / "skills/deep-skills/scripts/create_course.py"
-VALIDATE = ROOT / "skills/deep-skills/scripts/validate_learning_vault.py"
+CREATE = ROOT / "skills/mastery-learning-obsidian/scripts/create_course.py"
+VALIDATE = ROOT / "skills/mastery-learning-obsidian/scripts/validate_learning_vault.py"
 
 
 class VaultValidatorTests(unittest.TestCase):

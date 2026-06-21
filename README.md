@@ -1,4 +1,4 @@
-# Deep Skills
+# Mastery Learning Skills
 
 > English | [简体中文](./README_zh.md)
 
@@ -13,11 +13,11 @@ These skills are designed to enforce deliberate practice, evidence-based gatekee
 ## Quickstart (30-second setup)
 
 1. Clone or download this repository.
-2. Copy or symlink `skills/deep-skills/` into your agent host's skills directory.
+2. Copy or symlink `skills/mastery-learning-obsidian/` into your agent host's skills directory.
 3. Start a deliberate learning session by pasting your study material:
 
 ```text
-Use deep-skills to learn from the material below:
+Use mastery-learning-obsidian to learn from the material below:
 
 [Paste material here]
 ```
@@ -101,7 +101,7 @@ python -m unittest discover -s tests -v
 
 To dry-run course generation locally:
 ```bash
-python skills/deep-skills/scripts/create_course.py \
+python skills/mastery-learning-obsidian/scripts/create_course.py \
   --vault "/path/to/Obsidian Vault" \
   --topic "数学-极限" \
   --subject "数学" \

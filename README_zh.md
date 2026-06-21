@@ -1,4 +1,4 @@
-# Deep Skills (掌握度学习导师插件)
+# Mastery Learning Skills (掌握度学习导师插件)
 
 > [English](./README.md) | 简体中文
 
@@ -13,11 +13,11 @@
 ## 快速开始（30秒上手）
 
 1. 克隆或下载本仓库。
-2. 将 `skills/deep-skills/` 目录复制或创建软链接（symlink）到你的 Agent 宿主的 skills 目录下。
+2. 将 `skills/mastery-learning-obsidian/` 目录复制或创建软链接（symlink）到你的 Agent 宿主的 skills 目录下。
 3. 粘贴你的学习资料，直接开启刻意学习会话：
 
 ```text
-Use deep-skills to learn from the material below:
+Use mastery-learning-obsidian to learn from the material below:
 
 [在此粘贴你的学习资料]
 ```
@@ -101,7 +101,7 @@ python -m unittest discover -s tests -v
 
 如果需要在本地安全地预览课程生成目录结构：
 ```bash
-python skills/deep-skills/scripts/create_course.py \
+python skills/mastery-learning-obsidian/scripts/create_course.py \
   --vault "/path/to/Obsidian Vault" \
   --topic "数学-极限" \
   --subject "数学" \

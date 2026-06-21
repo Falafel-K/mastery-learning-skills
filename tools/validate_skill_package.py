@@ -23,7 +23,7 @@ BANNED_FRONTMATTER = {
     "mcpServers",
 }
 
-# Specific rules for deep-skills
+# Specific rules for mastery-learning-obsidian
 MASTERY_REFERENCES = [
     "learning-protocol.md",
     "assessment-and-mastery.md",
@@ -97,7 +97,7 @@ def validate_generic_skill(skill_dir: Path, errors: list[str], warnings: list[st
                 errors.append(f"[{skill_name}] Template missing AI-managed markers: {template.name}")
 
 
-def validate_deep_skills(skill_dir: Path, errors: list[str], warnings: list[str]) -> None:
+def validate_mastery_learning_obsidian(skill_dir: Path, errors: list[str], warnings: list[str]) -> None:
     skill_name = skill_dir.name
     skill_file = skill_dir / "SKILL.md"
     if not skill_file.is_file():
@@ -164,8 +164,8 @@ def main(argv: list[str] | None = None) -> int:
         validate_generic_skill(skill_dir, errors, warnings)
         
         # Specific validation based on name
-        if skill_dir.name == "deep-skills":
-            validate_deep_skills(skill_dir, errors, warnings)
+        if skill_dir.name == "mastery-learning-obsidian":
+            validate_mastery_learning_obsidian(skill_dir, errors, warnings)
         elif skill_dir.name == "skill-scaffolder":
             validate_skill_scaffolder(skill_dir, errors, warnings)
             

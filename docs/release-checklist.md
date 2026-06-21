@@ -24,7 +24,7 @@
 python tools/validate_skill_package.py
 python tools/validate_evals.py
 python -m unittest discover -s tests -v
-python skills/deep-skills/scripts/create_course.py \
+python skills/mastery-learning-obsidian/scripts/create_course.py \
   --vault /tmp/example-vault \
   --topic "验证主题" \
   --dry-run

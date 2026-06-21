@@ -8,7 +8,7 @@ from pathlib import Path
 # Import the parsing function from scripts
 import sys
 ROOT = Path(__file__).resolve().parents[1]
-sys.path.insert(0, str(ROOT / "skills" / "deep-skills" / "scripts"))
+sys.path.insert(0, str(ROOT / "skills" / "mastery-learning-obsidian" / "scripts"))
 from generate_dashboard import parse_mastery_ledger, find_ledger_file, generate_progressbar
 
 

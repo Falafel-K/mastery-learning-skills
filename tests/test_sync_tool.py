@@ -8,8 +8,8 @@ import unittest
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
-CREATE = ROOT / "skills/deep-skills/scripts/create_course.py"
-SYNC = ROOT / "skills/deep-skills/scripts/sync_course.py"
+CREATE = ROOT / "skills/mastery-learning-obsidian/scripts/create_course.py"
+SYNC = ROOT / "skills/mastery-learning-obsidian/scripts/sync_course.py"
 
 
 class SyncToolTests(unittest.TestCase):

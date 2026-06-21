@@ -1,5 +1,5 @@
 #!/bin/bash
-# Cross-platform installer shell script to link Deep Skills packages.
+# Cross-platform installer shell script to link Mastery Learning Skills packages.
 
 set -e
 
@@ -29,7 +29,7 @@ done
 SRC_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 
 echo "----------------------------------------"
-echo "Deep Skills Installer"
+echo "Mastery Learning Skills Installer"
 echo "----------------------------------------"
 echo "Source directory: $SRC_DIR"
 echo "Target directory: $DEST"
@@ -42,7 +42,7 @@ if [ ! -d "$DEST" ]; then
 fi
 
 # Create symlinks
-for skill in "deep-skills" "skill-scaffolder"; do
+for skill in "mastery-learning-obsidian" "skill-scaffolder"; do
   SKILL_SRC="$SRC_DIR/skills/$skill"
   SKILL_DEST="$DEST/$skill"
 
@@ -57,6 +57,6 @@ for skill in "deep-skills" "skill-scaffolder"; do
 done
 
 echo ""
-echo "Successfully linked Deep Skills!"
+echo "Successfully linked Mastery Learning Skills!"
 echo "You can now use these skills in your Agent workspace."
 echo "----------------------------------------"

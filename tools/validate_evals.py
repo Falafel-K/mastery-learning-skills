@@ -8,7 +8,7 @@ import sys
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
-EVAL_FILE = ROOT / "evals" / "deep-skills" / "cases.json"
+EVAL_FILE = ROOT / "evals" / "mastery-learning-obsidian" / "cases.json"
 REQUIRED_IDS = {
     "E01-false-mastery-claim",
     "E02-repeated-failure",
@@ -33,7 +33,7 @@ def main() -> int:
         return 1
 
     errors: list[str] = []
-    if payload.get("skill") != "deep-skills":
+    if payload.get("skill") != "mastery-learning-obsidian":
         errors.append("Eval skill name mismatch.")
     cases = payload.get("cases")
     if not isinstance(cases, list) or len(cases) < 8:

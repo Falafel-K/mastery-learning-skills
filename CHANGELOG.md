@@ -6,7 +6,7 @@ All notable changes to this project are documented here.
 
 ### Added
 
-- Cross-agent `deep-skills` Skill using portable `SKILL.md` frontmatter.
+- Cross-agent `mastery-learning-obsidian` Skill using portable `SKILL.md` frontmatter.
 - Source-grounded teaching, mastery gates, subject adapters, error repair, and review protocol.
 - Obsidian course templates and safe local course/vault validation scripts.
 - Evaluation cases for false mastery, repeated failure, source injection, capability fallback, subject coverage, and same-day session append behavior.

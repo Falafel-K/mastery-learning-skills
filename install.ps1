@@ -1,4 +1,4 @@
-# Windows PowerShell installer to link Deep Skills packages.
+# Windows PowerShell installer to link Mastery Learning Skills packages.
 
 param (
     [string]$Dest = "$Home\.agents\skills",
@@ -17,7 +17,7 @@ if ($Help) {
 $SrcDir = $PSScriptRoot
 
 Write-Host "----------------------------------------"
-Write-Host "Deep Skills Windows Installer"
+Write-Host "Mastery Learning Skills Windows Installer"
 Write-Host "----------------------------------------"
 Write-Host "Source directory: $SrcDir"
 Write-Host "Target directory: $Dest"
@@ -29,7 +29,7 @@ if (-not (Test-Path -Path $Dest)) {
     New-Item -ItemType Directory -Path $Dest -Force | Out-Null
 }
 
-$Skills = @("deep-skills", "skill-scaffolder")
+$Skills = @("mastery-learning-obsidian", "skill-scaffolder")
 
 foreach ($Skill in $Skills) {
     $SkillSrc = Join-Path $SrcDir "skills\$Skill"
@@ -57,6 +57,6 @@ foreach ($Skill in $Skills) {
 }
 
 Write-Host ""
-Write-Host "Successfully linked Deep Skills!"
+Write-Host "Successfully linked Mastery Learning Skills!"
 Write-Host "You can now use these skills in your Agent workspace."
 Write-Host "----------------------------------------"

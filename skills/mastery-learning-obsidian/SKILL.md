@@ -1,5 +1,5 @@
 ---
-name: deep-skills
+name: mastery-learning-obsidian
 description: Run an explicit, source-grounded mastery-learning workflow for user-supplied study material or a continuing course. Use when the user asks to learn, study, review, continue a topic, build practice, or maintain Obsidian learning records. Do not use for a one-off factual answer unless the user asks for interactive learning.
 license: MIT
 compatibility: Markdown-capable agent; optional filesystem access for Obsidian synchronization and optional Python for local helpers.

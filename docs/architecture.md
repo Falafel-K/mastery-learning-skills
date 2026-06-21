@@ -5,7 +5,7 @@
 This repository deliberately separates the **installable learning product** from the **quality system used to maintain it**.
 
 ```text
-skills/deep-skills/  -> installed by an agent host
+skills/mastery-learning-obsidian/  -> installed by an agent host
   SKILL.md                         -> activation and orchestration
   references/                      -> detailed protocols read on demand
   assets/templates/                -> copied into a learner's Obsidian Vault

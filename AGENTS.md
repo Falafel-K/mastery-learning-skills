@@ -1,6 +1,6 @@
 # Repository guidance for coding agents
 
-This repository publishes a cross-agent learning Skill. Treat `skills/deep-skills/` as a public, portable product rather than a private prompt dump.
+This repository publishes a cross-agent learning Skill. Treat `skills/mastery-learning-obsidian/` as a public, portable product rather than a private prompt dump.
 
 ## Non-negotiable contracts
 
@@ -20,7 +20,7 @@ This repository publishes a cross-agent learning Skill. Treat `skills/deep-skill
 ## Before editing
 
 1. Read the affected `SKILL.md` section and linked reference documents.
-2. Inspect relevant `evals/deep-skills/cases.json` cases.
+2. Inspect relevant `evals/mastery-learning-obsidian/cases.json` cases.
 3. Make the smallest coherent change.
 4. Update docs, templates, and tests when the contract changes.
 5. Run:

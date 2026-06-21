@@ -25,9 +25,9 @@ def main() -> int:
         hooks_dir.mkdir(parents=True, exist_ok=True)
 
     hook_content = """#!/bin/sh
-# Git pre-commit hook to validate Deep Skills package integrity.
+# Git pre-commit hook to validate Mastery Learning Skills package integrity.
 
-echo "=== Running Deep Skills pre-commit validation ==="
+echo "=== Running Mastery Learning Skills pre-commit validation ==="
 
 # 1. Run package structures validator
 python tools/validate_skill_package.py

@@ -29,9 +29,9 @@ class SkillContractTests(unittest.TestCase):
         self.assertIn("passed", result.stdout.lower())
 
     def test_skill_uses_portable_frontmatter(self) -> None:
-        text = (ROOT / "skills/deep-skills/SKILL.md").read_text(encoding="utf-8")
+        text = (ROOT / "skills/mastery-learning-obsidian/SKILL.md").read_text(encoding="utf-8")
         frontmatter = text.split("---", 2)[1]
-        self.assertIn("name: deep-skills", frontmatter)
+        self.assertIn("name: mastery-learning-obsidian", frontmatter)
         self.assertIn("description:", frontmatter)
         self.assertNotIn("disable-model-invocation", frontmatter)
         self.assertNotIn("allowed-tools", frontmatter)

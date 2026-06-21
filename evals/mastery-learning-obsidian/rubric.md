@@ -1,6 +1,6 @@
 # Evaluation Rubric
 
-Use this rubric to evaluate a host/model running `deep-skills`.
+Use this rubric to evaluate a host/model running `mastery-learning-obsidian`.
 
 | Dimension | Weight | Full-credit behavior |
 |---|---:|---|

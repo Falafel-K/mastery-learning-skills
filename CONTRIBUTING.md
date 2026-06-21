@@ -15,7 +15,7 @@ Good contributions make the learning workflow more reliable, more portable, more
 ## Before opening a pull request
 
 1. Read `AGENTS.md` and the relevant reference protocol.
-2. Avoid platform-specific fields in `skills/deep-skills/SKILL.md`.
+2. Avoid platform-specific fields in `skills/mastery-learning-obsidian/SKILL.md`.
 3. Update evaluation cases if behavior changes.
 4. Add or update tests for scripts and validators.
 5. Run:

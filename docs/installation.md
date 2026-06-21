@@ -5,7 +5,7 @@
 The unit to install is this directory:
 
 ```text
-skills/deep-skills/
+skills/mastery-learning-obsidian/
 ```
 
 Copy or symlink the whole directory. Do not copy only `SKILL.md`; the Skill references supporting protocols, templates, and safe scripts.
@@ -15,7 +15,7 @@ Copy or symlink the whole directory. Do not copy only `SKILL.md`; the Skill refe
 For a repository-specific install, place the directory at:
 
 ```text
-<your-project>/.agents/skills/deep-skills/
+<your-project>/.agents/skills/mastery-learning-obsidian/
 ```
 
 For a personal install, use the user-level skills location supported by your Codex installation. Codex can discover repository skills while walking from the working directory toward the repository root.
@@ -25,20 +25,20 @@ For a personal install, use the user-level skills location supported by your Cod
 For a project-specific install:
 
 ```text
-<your-project>/.claude/skills/deep-skills/
+<your-project>/.claude/skills/mastery-learning-obsidian/
 ```
 
 For a personal install:
 
 ```text
-~/.claude/skills/deep-skills/
+~/.claude/skills/mastery-learning-obsidian/
 ```
 
 Claude Code can invoke a Skill directly by name or load it when the request matches its description. This Skill is intentionally framed as an explicit learning workflow because it may write durable study records.
 
 ## Google Antigravity
 
-Use the workspace or global Skills location exposed by the installed Antigravity version, or its Skills import/manager UI, and copy the same `deep-skills` directory unchanged. Antigravity supports a directory-based `SKILL.md` format, but locations and UI steps can change between releases.
+Use the workspace or global Skills location exposed by the installed Antigravity version, or its Skills import/manager UI, and copy the same `mastery-learning-obsidian` directory unchanged. Antigravity supports a directory-based `SKILL.md` format, but locations and UI steps can change between releases.
 
 ## Other Agent Skills hosts
 
@@ -50,8 +50,8 @@ On macOS or Linux, from a checked-out copy of this repository:
 
 ```bash
 mkdir -p /path/to/project/.agents/skills
-ln -s "$(pwd)/skills/deep-skills" \
-  /path/to/project/.agents/skills/deep-skills
+ln -s "$(pwd)/skills/mastery-learning-obsidian" \
+  /path/to/project/.agents/skills/mastery-learning-obsidian
 ```
 
 Use a copy instead of a symlink when your host or operating system does not follow symlinks.
@@ -61,7 +61,7 @@ Use a copy instead of a symlink when your host or operating system does not foll
 Start with an explicit request:
 
 ```text
-Use deep-skills to learn from the material below.
+Use mastery-learning-obsidian to learn from the material below.
 I want evidence of explanation, application, error repair, and transfer—not a fast summary.
 
 [Paste material]
