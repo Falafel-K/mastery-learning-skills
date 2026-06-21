@@ -1,6 +1,6 @@
 ---
 name: help
-description: 显示 Obsidian 互动式掌握学习系统（Mastery Learning）中所有可用指令的使用指南。(Display help information for all Mastery Learning skills and commands.)
+description: 显示 Mastery Learning 系统中所有可用指令的使用指南，包括学习、复习、脚手架与更新命令。(Display help information for all Mastery Learning skills and commands.)
 license: MIT
 compatibility: Markdown-capable agent.
 ---
@@ -19,6 +19,8 @@ This command lists and explains all available slash commands for the interactive
 | **`/sync`** | Note Synchronization | Synchronizes the active session state and scores from the log to your local Obsidian Vault note files inside the designated `AI-MANAGED` boundaries. |
 | **`/audit`** | Coverage Audit | Verifies that all important claims and concepts in the source materials have been successfully mapped to knowledge points and assessed. |
 | **`/handoff`** | Session Hand-off | Compacts the active session state, scores, open errors, next task, and note paths into a short code block to easily resume in a new chat. |
+| **`/creat`** | Skill Scaffolder | Scaffolds a new standardized agent skill folder conforming to the Four Pillars architecture. Starts with a 3-question interview (or auto-infers if you say "默认"). Runs in Preview Mode by default — outputs Markdown in chat; only writes files if you provide a target folder path. |
+| **`/update`** | Auto-Update | Detects your OS and re-runs the online install script to upgrade all Mastery Learning Skills to the latest version in one step. |
 | **`/help`** | Help Guide | Displays this guide explaining all commands and the overall Mastery Learning loop. |
 
 ## Quickstart Guide
