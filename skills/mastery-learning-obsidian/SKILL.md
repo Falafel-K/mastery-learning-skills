@@ -1,6 +1,6 @@
 ---
 name: mastery-learning-obsidian
-description: 启动互动式掌握学习系统，支持学习、检索式复习与 Obsidian 笔记库同步。(Interactive mastery-learning system supporting active study, retrieval practice, and ledger synchronization.)
+description: 启动 Obsidian 互动式掌握学习系统，提供课程出题评估与检索式复习工作流。(Obsidian interactive mastery learning loop with paced study and retrieval practice.)
 license: MIT
 compatibility: Markdown-capable agent; optional filesystem access for local note editing.
 ---

@@ -2,11 +2,9 @@
 
 > English | [简体中文](./README_zh.md)
 
-> My agent skills that I use every day to master technical subjects — not vibe learning.
+An interactive Mastery Learning skill package for agent hosts, integrated with Obsidian vault storage.
 
-Learning complex technical topics (math, programming, data science, engineering) is hard. Standard AI explanations make you feel smart in the moment, but they build no storage strength. You forget it all tomorrow. 
-
-These skills are designed to enforce deliberate practice, evidence-based gatekeeping, and structured Obsidian notes. They work with any agent host.
+This package enforces **deliberate practice**, **evidence-based progression gates**, and **structured note archiving**. It is fully compatible with Claude Code and other agent hosts supporting Markdown-based skill protocols. It focuses on diagnosing and reinforcing learner capability, compiling learning history into structured Obsidian notes rather than bloated chat transcripts.
 
 ---
 
@@ -51,35 +49,34 @@ Use mastery-learning-obsidian to learn from the material below:
 
 ---
 
-## Why These Skills Exist
+## Design Goals & Key Features
 
-We built this skill to fix common failure modes when learning with Claude Code, Codex, and other coding agents.
+This package addresses 5 common failure modes when learning with LLMs:
 
-### #1: "The agent explained it, but I cannot use it."
-**The Problem**: Reading an explanation gives an illusion of fluency, but no storage strength.
-**The Fix**: Strict evidence gates. You cannot advance to the next topic by saying "I understand". You must provide active evidence: **Recall, Discrimination, Application, Transfer, Error Repair, or Synthesis**.
+1. **Eliminate Illusion of Fluency**: Passive reading builds no durable memory. We implement **strict evidence gates** requiring active evidence (Recall, Discrimination, Application, Transfer, Error Repair, or Synthesis) before moving forward.
+2. **Paced Progression Rubric**: AI tutors often dump vast text without verification. We apply a **0-5 mastery grading system**. Scores below 3 block progression; key points require 4; integrative capstone work requires 5. Consecutive failures trigger cognitive backoff and prerequisite review.
+3. **Preserve Retrieval Difficulty**: AI shouldn't bypass your thinking by showing answers instantly. We mandate a **Hint Ladder** (Metacognitive cue → Directional hint → Code/Formula skeleton → Worked example). An example demonstration never counts as learner mastery; a fresh verification task is always presented afterward.
+4. **Clean Archive over Chat logs**: Direct chat backups create noise. We enforce a **Storage Contract**, writing only in designated `AI-MANAGED` blocks within Obsidian notes, preserving your custom hand-written files.
+5. **Session Recovery via Markdown**: Chat limits erase context. We treat local **Mastery Ledger** markdown files as the single source of truth, enabling instant state restoration across sessions.
 
-### #2: "The agent moved on while I was still confused."
-**The Problem**: AI tutors often dump chapters at once and keep going without checking.
-**The Fix**: A strict 0-5 mastery rubric. Scores below 3 block progression. Key points require a score of 4. Integrative capstone work requires 5. If you fail 3 times, the skill triggers a cognitive backup: downgrading difficulty or checking missing prerequisites.
+---
 
-### #3: "The agent gave me the answer before I could think."
-**The Problem**: AI often outputs the solution to its own questions, depriving you of retrieval difficulty.
-**The Fix**: A structured hint ladder (Metacognitive prompt → Directional cue → Partial structure → Worked example) and fresh verification tasks. A solved example never counts as learner evidence.
+## Four Pillars Architecture
 
-### #4: "My notes became an unreadable transcript."
-**The Problem**: Storing complete dialogue transcripts makes notes useless for quick reviews.
-**The Fix**: The Obsidian Contract. We only record durable learning state in structure notes (`00-课程主页.md`, `02-知识点地图.md`, `03-掌握度账本.md`, `04-错题与误区.md`, `06-复习队列.md`). AI only modifies data between `<!-- AI-MANAGED:START -->` and `<!-- AI-MANAGED:END -->` blocks, leaving your private notes untouched.
+This project adopts a highly robust, portable, and flexible agent skill design paradigm consisting of four core pillars:
 
-### #5: "A new chat or different agent lost all my learning state."
-**The Problem**: Chat history limit wipes out your progress.
-**The Fix**: Plain Markdown files are the single source of truth. A new agent or session reads `03-掌握度账本.md` and immediately resumes right where you left off.
+1. **Trigger & Invocation Paradigm** (触发与调用隔离): Separates user-entered slash commands (User-invoked, like `/study` and `/review`) from autonomous routines (Model-invoked, like `mastery-assessment` and `learning-repair`) to keep the user in control and prevent accidental prompts. See [docs/invocation.md](./docs/invocation.md).
+2. **Soft Degradation Decoupling** (存储软降级): decoupled pedagogical scoring from direct file writes. Enables smooth fallbacks across `Full mode` (local writes), `Cloud mode` (Notion/Feishu patches), and `Chat-only mode` (memory + handoff blocks). See [docs/adr/0001-mastery-storage-soft-degradation.md](./docs/adr/0001-mastery-storage-soft-degradation.md).
+3. **Vocabulary Alignment** (术语统一对齐): Enforces a strict vocabulary filter using [CONTEXT.md](./CONTEXT.md) to ensure consistent AI phrasing and eliminate terminology confusion.
+4. **Linking Ecosystem & Scaffolding** (自动链接与脚手架): Provides fast symlinking via `install.ps1`/`install.sh` for development reloading, and extends `skill-scaffolder` to automatically generate new skills complying with these pillars.
 
 ---
 
 ## Under the Hood
 
 The portable core is structured into:
+- `CONTEXT.md`: Terminology vocabulary filter.
+- `docs/invocation.md` & `docs/adr/`: Invocation specs and architectural decision records.
 - `SKILL.md`: Light entrypoint defining triggers and commands.
 - `references/`: Modular documents consulted dynamically by the agent.
   - `learning-protocol.md`: State machine and cognitive load rules.

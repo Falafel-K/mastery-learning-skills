@@ -1,6 +1,6 @@
 ---
 name: skill-scaffolder
-description: 自动化生成具备四大支柱（触发范式、降级容错、术语对齐、调试生态）的技能包结构。(Automated generator for scaffolding agent skills complying with the Four Pillars of skill architecture.)
+description: 自动生成符合四大支柱（触发范式、降级容错、统一词汇、调试生态）的技能包结构。(Scaffolding agent skills conforming to the four architectural pillars.)
 license: MIT
 compatibility: Markdown-capable agent; local filesystem access for skill folder generation.
 ---
