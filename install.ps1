@@ -13,10 +13,10 @@ if ($Help) {
     Write-Host "  -Dest <dir>    Set the target destination directory (default: auto-detected)"
     Write-Host "  -Uninstall     Uninstall/remove Mastery Learning Skills from target/detected directories"
     Write-Host "  -Help          Show this help message"
-    exit
+    return
 }
 
-$Skills = @("mastery-learning-obsidian", "skill-scaffolder")
+$Skills = @("mastery-learning-obsidian", "skill-scaffolder", "study", "review", "dashboard", "sync", "audit", "handoff", "help")
 
 # Auto-detect target paths if -Dest is not specified
 $TargetPaths = @()
@@ -92,7 +92,7 @@ if ($Uninstall) {
     Write-Host "Successfully uninstalled Mastery Learning Skills!"
     Write-Host "All configured links and folders have been cleared."
     Write-Host "----------------------------------------"
-    exit 0
+    return
 }
 
 Write-Host "----------------------------------------"
@@ -157,7 +157,7 @@ if ($LocalMode) {
     } catch {
         Write-Error "Failed to download packages: $_"
         Remove-Item -Path $TempFolder -Recurse -Force -ErrorAction SilentlyContinue
-        exit 1
+        return
     }
     
     Write-Host "Extracting packages..."
@@ -166,7 +166,7 @@ if ($LocalMode) {
     } catch {
         Write-Error "Failed to extract archive. Please ensure Expand-Archive is available."
         Remove-Item -Path $TempFolder -Recurse -Force -ErrorAction SilentlyContinue
-        exit 1
+        return
     }
     
     $ExtractedFolder = Join-Path $TempFolder "mastery-learning-skills-main"

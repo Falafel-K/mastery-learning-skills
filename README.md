@@ -15,6 +15,8 @@ The installer automatically detects active agent environments on your system and
 - **Claude Code**: `~/.claude/skills`
 - **General Fallback / Codex**: `~/.agents/skills`
 
+This registers the main program alongside dedicated sub-command router skills (`/study`, `/review`, `/dashboard`, `/sync`, `/audit`, `/handoff`, and `/help`). They will appear directly in your agent's autocomplete dropdown menu!
+
 ### 1. One-Line Online Installation (Recommended, no Git required)
 Copy and run the appropriate command for your system in your terminal:
 - **macOS / Linux**:

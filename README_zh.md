@@ -15,6 +15,8 @@
 - **Claude Code**：`~/.claude/skills`
 - **通用 / Codex / 备用路径**：`~/.agents/skills`
 
+这会同时注册技能主程序与专属的子命令路由技能（包括 `/study`、`/review`、`/dashboard`、`/sync`、`/audit`、`/handoff`、`/help`）。这些子命令将直接原生呈现在你 Agent 的下拉斜杠命令补全菜单中！
+
 ### 1. 在线一键安装 (无需克隆)
 在终端中复制并运行以下对应系统的命令：
 - **macOS / Linux**:
