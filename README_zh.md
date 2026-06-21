@@ -10,25 +10,26 @@
 
 ## 快速开始（30秒上手）
 
-1. **一键在线安装（推荐，无需手动克隆或安装 Git）**：
-   在终端中复制并运行以下对应系统的命令：
-   - **macOS / Linux**:
-     ```bash
-     curl -fsSL https://raw.githubusercontent.com/Falafel-K/mastery-learning-skills/main/install.sh | bash
-     ```
-   - **Windows (PowerShell)**:
-     ```powershell
-     irm https://raw.githubusercontent.com/Falafel-K/mastery-learning-skills/main/install.ps1 | iex
-     ```
-2. **开发者本地安装（克隆与软链接）**：
-   克隆本仓库并在本地运行安装脚本以创建实时生效的软链接：
-   ```bash
-   git clone https://github.com/Falafel-K/mastery-learning-skills.git
-   cd mastery-learning-skills
-   ```
-   然后运行安装脚本：
-   - **macOS/Linux**: `chmod +x install.sh && ./install.sh`
-   - **Windows (PowerShell)**: `.\install.ps1`
+### 在线一键安装 (无需克隆)
+在终端中复制并运行以下对应系统的命令：
+- **macOS / Linux**:
+  ```bash
+  curl -fsSL https://raw.githubusercontent.com/Falafel-K/mastery-learning-skills/main/install.sh | bash
+  ```
+- **Windows (PowerShell)**:
+  ```powershell
+  irm https://raw.githubusercontent.com/Falafel-K/mastery-learning-skills/main/install.ps1 | iex
+  ```
+
+### 本地克隆安装 (方便开发调试)
+克隆本仓库并在本地运行安装脚本以创建实时生效的软链接：
+```bash
+git clone https://github.com/Falafel-K/mastery-learning-skills.git
+cd mastery-learning-skills
+```
+然后运行安装脚本：
+- **macOS/Linux**: `chmod +x install.sh && ./install.sh`
+- **Windows (PowerShell)**: `.\install.ps1`
 3. 粘贴你的学习资料，直接开启刻意学习会话：
 
 ```text
@@ -41,7 +42,7 @@ Use mastery-learning-obsidian to learn from the material below:
 
 ---
 
-## 命令参考矩阵 (Reference)
+## 指令参考 (Reference)
 
 | 命令行指令 | 执行动作 | 对应的行为规则契约 |
 |---|---|---|
@@ -56,13 +57,13 @@ Use mastery-learning-obsidian to learn from the material below:
 
 ## 设计解决的教学痛点
 
-本技能包致力于解决与大模型交互学习时最常见的 5 种“学习失效”场景：
+本技能包旨在解决用 AI 学习时最常见的 5 种“假学会”问题：
 
-1. **防止假性流畅感**：被动阅读 AI 的解释往往产生“已掌握”的错觉。本技能包引入**严苛的证据门禁**。在学习者提供可观察的证据（复述、辨析、应用、迁移、纠错或综合任务）之前，禁止推进。
-2. **缺乏个性化进度门禁**：AI 导师常盲目倾倒大段内容。我们实施 **0-5 掌握度评分标准**。低于 3 分禁止解锁新概念；核心概念要求 4 分；综合 capstone 要求 5 分。若连续三次核验失败，自动执行认知降级，退回检查前置依赖。
-3. **过度热心夺走检索难度**：AI 常常直接给出答案。本技能包强制使用**提示梯子 (Hint Ladder)**（思路暗示 → 框架骨架 → 相似 Worked Example → Graded Task）。在向学生提供例题示范后，必须换一道全新变式题进行测试，且示范代码不计入掌握证据。
-4. **笔记数据噪音过载**：直接记录聊天历史噪音巨大。我们通过**存储契约**，仅在 `03-掌握度账本.md` 等文件的 `AI-MANAGED` 托管区间内自动更新结构化卡片，绝不修改您的个人笔记。
-5. **跨会话学习状态丢失**：AI 的上下文窗口限制了长期维系。本技能包以本地 Markdown **掌握度账本**为唯一真相源，跨会话只需重新读取账本即可恢复前次进度。
+- **防止“假装懂了”**：只看 AI 的讲解容易产生“我学会了”的错觉。这里设置了严格的“证据卡点”——必须通过复述、对比、实际应用、迁移或找错等测试，才能解锁新内容。
+- **不让进度“坐火箭”**：传统 AI 喜欢一次倒给你一整章内容。我们采用 0-5 分评分制，得分低于 3 分时会被强制留在当前知识点，AI 会降低难度重新教你，直到及格。
+- **AI 不当“剧透狂”**：很多 AI 总是直接把代码和答案甩出来。这里强制使用“提示梯子”一步步引导你（先给思路，再给代码骨架，接着讲相似例题，最后让你做新变式题）。AI 的例题演示不能作为你学会的证据。
+- **笔记不记流水账**：直接导出聊天记录噪音太多。本技能包有专属的“存储规矩”，只在笔记特定的“AI托管区”里更新账本，绝对不乱动你的手写笔记。
+- **新开对话不怕忘**：大模型对话长了就会失忆。我们以本地的 Markdown 掌握度账本为准，每次新开对话，AI 读一下账本就能瞬间接上之前的进度。
 
 ---
 
@@ -70,12 +71,10 @@ Use mastery-learning-obsidian to learn from the material below:
 
 本插件遵循高度健壮、可移植且灵活的 AI 智能体技能设计范式，由以下四大核心支柱构成：
 
-1. **触发与调用隔离**：划分用户显式键入指令（User-invoked，如 `/study` 和 `/review`）与 AI 自主运行子程序（Model-invoked，如打分出题和错误修复）的边界，避免在日常会话中意外打扰用户。详见 [docs/invocation.md](./docs/invocation.md)。
-2. **存储依赖软降级**：学习核心逻辑与持久层物理写入解耦，提供 `Full mode`（本地 Obsidian 写入）、`Cloud mode`（输出 Notion/飞书 Markdown 补丁块）与 `Chat-only mode`（输出 Handoff 会话移交块）三级退化方案。详见 [docs/adr/0001-mastery-storage-soft-degradation.md](./docs/adr/0001-mastery-storage-soft-degradation.md)。
-3. **术语统一过滤器**：通过根目录 [CONTEXT.md](./CONTEXT.md) 锁定标准教学用词（掌握度账本、前置依赖、提示梯子、认知修复），消除 Agent 代名词歧义与黑话。
-4. **敏捷调试与脚手架**：支持通过 `install.ps1`/`install.sh` 快速在本地 `.agents/skills` 建立软链接开发调试，并使用 `skill-scaffolder` 自动生成符合此四大支柱规范的新技能。
-
----
+- **触发控制**：明确划分“人类主动下指令”（如学习 `/study`、复习 `/review`）和“AI 自动跑子任务”（如打分评估、纠错引导）的界限，防止 AI 在日常聊天时自作主张打扰你。详见 [docs/invocation.md](./docs/invocation.md)。
+- **存储降级**：学习逻辑和笔记写入是松耦合的。支持三种模式：本地 Obsidian 直接写入、云笔记本（Notion/飞书）复制粘贴补丁包、纯聊天对话框导出移交备忘录。详见 [docs/adr/0001-mastery-storage-soft-degradation.md](./docs/adr/0001-mastery-storage-soft-degradation.md)。
+- **统一术语**：在根目录 [CONTEXT.md](./CONTEXT.md) 中锁死了“掌握度账本”、“前置依赖”、“提示梯子”、“认知修复”等教学术语，防止 AI 说话多变、制造混乱。
+- **链接与脚手架**：一键脚本（`install.ps1`/`install.sh`）可在本地快速创建软链接方便调试；同时配备自动脚手架 `/create-skill` 确保新开发的技能自动符合上述三大标准。
 
 ## 核心架构设计 (Under the Hood)
 
