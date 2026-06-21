@@ -20,8 +20,13 @@
      ```powershell
      irm https://raw.githubusercontent.com/Falafel-K/mastery-learning-skills/main/install.ps1 | iex
      ```
-2. **开发者本地安装（已克隆本仓库，方便改动后实时生效）**：
-   在仓库根目录下直接运行本地脚本以自动创建软链接：
+2. **开发者本地安装（克隆与软链接）**：
+   克隆本仓库并在本地运行安装脚本以创建实时生效的软链接：
+   ```bash
+   git clone https://github.com/Falafel-K/mastery-learning-skills.git
+   cd mastery-learning-skills
+   ```
+   然后运行安装脚本：
    - **macOS/Linux**: `chmod +x install.sh && ./install.sh`
    - **Windows (PowerShell)**: `.\install.ps1`
 3. 粘贴你的学习资料，直接开启刻意学习会话：

@@ -20,8 +20,13 @@ This package enforces **deliberate practice**, **evidence-based progression gate
      ```powershell
      irm https://raw.githubusercontent.com/Falafel-K/mastery-learning-skills/main/install.ps1 | iex
      ```
-2. **Local Developer Installation (Clone of this repository, changes reflect instantly)**:
-   Run the local installer from the repository root directory to create symlinks:
+2. **Local Developer Installation (Clone & Symlink)**:
+   Clone the repository and run the local installer to create live developer symlinks:
+   ```bash
+   git clone https://github.com/Falafel-K/mastery-learning-skills.git
+   cd mastery-learning-skills
+   ```
+   Then run the installer:
    - **macOS/Linux**: `chmod +x install.sh && ./install.sh`
    - **Windows (PowerShell)**: `.\install.ps1`
 3. Start a deliberate learning session by pasting your study material:
