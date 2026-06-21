@@ -14,3 +14,4 @@ Synchronize the learning state by invoking the core `mastery-learning-obsidian` 
 When this command is triggered:
 1. You must immediately load the instructions and references of the `mastery-learning-obsidian` skill.
 2. Trigger the `/sync` command of the `mastery-learning-obsidian` skill to synchronize the active session state from the session log to the mastery ledger by modifying the local note files inside the designated `AI-MANAGED` zones.
+3. **Strict File-Write Boundary**: You MUST operate in Preview Mode and output Markdown in the chat window only, WITHOUT creating or writing any files on the filesystem, UNLESS the user has explicitly provided a target Obsidian Vault path in their prompt. Do not write to the project workspace root by default.

@@ -14,3 +14,4 @@ Perform a coverage audit by invoking the core `mastery-learning-obsidian` skill.
 When this command is triggered:
 1. You must immediately load the instructions and references of the `mastery-learning-obsidian` skill.
 2. Trigger the `/audit` command of the `mastery-learning-obsidian` skill to verify that every important source claim maps to a knowledge point, an assessment, and a current mastery state, reporting any gaps.
+3. **Strict File-Write Boundary**: You MUST operate in Preview Mode and output Markdown in the chat window only, WITHOUT creating or writing any files on the filesystem, UNLESS the user has explicitly provided a target Obsidian Vault path in their prompt. Do not write to the project workspace root by default.

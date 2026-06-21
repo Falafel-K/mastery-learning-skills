@@ -26,3 +26,9 @@ This command lists and explains all available slash commands for the interactive
 1. Paste your study materials and type `/study` to begin learning.
 2. Provide your local Obsidian Vault absolute path if you want note synchronization. Otherwise, the system runs in **Preview mode** where you can copy-paste the notes manually.
 3. Finish the evaluation tasks presented by the agent to score points and advance.
+
+## Strict File-Write Boundary & Preview Mode
+
+To protect your local storage and keep your workspace clean, the Mastery Learning system enforces a strict boundary for filesystem writes:
+- **Preview Mode (Default)**: By default, the system operates in Preview Mode. It will output all learning materials, ledger updates, error logs, and session notes directly in the chat window for you to review and copy.
+- **Full Mode (Obsidian Synchronization)**: The agent will only create or modify note files on your filesystem if you explicitly provide an absolute Obsidian Vault path in your prompt (e.g. `D:\Obsidian\MyVault`). The agent is strictly forbidden from writing files to default, relative, or guess-based paths.
