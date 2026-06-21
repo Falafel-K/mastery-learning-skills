@@ -16,7 +16,7 @@ if ($Help) {
     return
 }
 
-$Skills = @("mastery-learning-obsidian", "skill-scaffolder", "study", "review", "dashboard", "sync", "audit", "handoff", "help")
+$Skills = @("mastery-learning-obsidian", "skill-scaffolder", "study", "review", "dashboard", "sync", "audit", "handoff", "help", "creat", "update")
 
 # Auto-detect target paths if -Dest is not specified
 $TargetPaths = @()

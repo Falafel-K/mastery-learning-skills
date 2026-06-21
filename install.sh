@@ -30,7 +30,7 @@ while [[ "$#" -gt 0 ]]; do
 done
 
 # Skills to handle
-SKILLS=("mastery-learning-obsidian" "skill-scaffolder" "study" "review" "dashboard" "sync" "audit" "handoff" "help")
+SKILLS=("mastery-learning-obsidian" "skill-scaffolder" "study" "review" "dashboard" "sync" "audit" "handoff" "help" "creat" "update")
 
 # Auto-detect target paths if DEST is not specified
 if [ -n "$DEST" ]; then

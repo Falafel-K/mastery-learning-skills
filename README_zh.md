@@ -15,10 +15,19 @@
 - **Claude Code**：`~/.claude/skills`
 - **通用 / Codex / 备用路径**：`~/.agents/skills`
 
-这会同时注册技能主程序与专属的子命令路由技能（包括 `/study`、`/review`、`/dashboard`、`/sync`、`/audit`、`/handoff`、`/help`）。这些子命令将直接原生呈现在你 Agent 的下拉斜杠命令补全菜单中！
+这会同时注册技能主程序与专属的子命令路由技能（包括 `/study`、`/review`、`/dashboard`、`/sync`、`/audit`、`/handoff`、`/help`、`/creat`、`/update`）。这些子命令将直接原生呈现在你 Agent 的下拉斜杠命令补全菜单中！
 
-### 1. 在线一键安装 (无需克隆)
-在终端中复制并运行以下对应系统的命令：
+### 1. Agent 辅助免终端安装 (最推荐，免去终端复制)
+如果当前激活的 Agent 拥有终端/命令执行权限（如 Claude Code, Gemini 或 Antigravity 宿主），你只需将以下指令直接复制并发送给 Agent：
+
+```text
+请帮我安装 Mastery Learning Skills 技能包：如果是 Windows 系统，请运行命令 `irm https://raw.githubusercontent.com/Falafel-K/mastery-learning-skills/main/install.ps1 | iex`；如果是 macOS/Linux 系统，请运行命令 `curl -fsSL https://raw.githubusercontent.com/Falafel-K/mastery-learning-skills/main/install.sh | bash`。
+```
+
+Agent 在读取到该请求后，会自动在后台拉取安装脚本并执行，一秒内为你配齐所有指令！
+
+### 2. 在线一键安装 (手动在终端运行)
+如果你更倾向于手动在系统终端运行，请复制并执行对应系统的命令：
 - **macOS / Linux**:
   ```bash
   curl -fsSL https://raw.githubusercontent.com/Falafel-K/mastery-learning-skills/main/install.sh | bash
@@ -28,8 +37,12 @@
   irm https://raw.githubusercontent.com/Falafel-K/mastery-learning-skills/main/install.ps1 | iex
   ```
 
-### 2. 一键卸载清理 (干净清除全部技能指令)
-如需彻底卸载本技能包并清理配置目录，请执行以下命令：
+### 3. 一键卸载清理 (干净清除全部技能指令)
+你可以在 Agent 聊天框中发送以下内容来让 Agent 自动为你卸载：
+```text
+请帮我卸载 Mastery Learning Skills：如果是 Windows 系统，请运行命令 `& ([scriptblock]::Create((irm https://raw.githubusercontent.com/Falafel-K/mastery-learning-skills/main/install.ps1))) -Uninstall`；如果是 macOS/Linux 系统，请运行命令 `curl -fsSL https://raw.githubusercontent.com/Falafel-K/mastery-learning-skills/main/install.sh | bash -s -- --uninstall`。
+```
+或者手动在你的系统终端中执行以下卸载命令：
 - **macOS / Linux**:
   ```bash
   curl -fsSL https://raw.githubusercontent.com/Falafel-K/mastery-learning-skills/main/install.sh | bash -s -- --uninstall
@@ -39,7 +52,7 @@
   & ([scriptblock]::Create((irm https://raw.githubusercontent.com/Falafel-K/mastery-learning-skills/main/install.ps1))) -Uninstall
   ```
 
-### 3. 本地克隆安装 (方便开发调试)
+### 4. 本地克隆安装 (方便开发调试)
 克隆本仓库并在本地运行安装脚本以创建实时生效的软链接：
 ```bash
 git clone https://github.com/Falafel-K/mastery-learning-skills.git
@@ -49,7 +62,7 @@ cd mastery-learning-skills
 - **macOS/Linux**: `chmod +x install.sh && ./install.sh` (卸载: `./install.sh --uninstall`)
 - **Windows (PowerShell)**: `.\install.ps1` (卸载: `.\install.ps1 -Uninstall`)
 
-### 4. 开启学习会话
+### 5. 开启学习会话
 在 Agent 会话中粘贴你的学习资料，直接开启刻意学习：
 
 ```text
@@ -66,12 +79,15 @@ Use mastery-learning-obsidian to learn from the material below:
 
 | 命令行指令 | 执行动作 | 对应的行为规则契约 |
 |---|---|---|
-| `/study [目标]` / `/learn [目标]` | 教学循环：若提供 `[目标]`（如 `K03`、`S1/第2节` 或关键字），强制覆盖自动顺序对该目标进行教学（若缺少前置知识会报警提示，但可强制执行）；若省去则自动学习下一知识点。 | `learning-protocol.md` |
+| `/study [目标]` | 教学循环：若提供 `[目标]`（如 `K03`、`S1/第2节` 或关键字），强制覆盖自动顺序对该目标进行教学；若省去则自动学习下一知识点。 | `learning-protocol.md` |
 | `/review [目标]` | 复习循环：若提供 `[目标]`（如 `K01`），立即对该知识点启动检索式复习；若省去则复习队列中所有到期的知识点。 | `assessment-and-mastery.md` |
+| `/dashboard` | 在聊天窗口中展示当前学习进度的可视化看板与 ASCII 进度条。 | `storage-contract.md` |
+| `/sync` | 强制调用本地安全的 Python 脚本 `sync_course.py`，将当前的掌握度与 Session 日志安全地同步到本地 Vault 笔记中。 | `storage-contract.md` |
 | `/audit` | 触发资料覆盖度审计：核验原始资料中的每一处核心论断/公式/代码是否已被全部映射并核验。 | `learning-protocol.md` |
-| `/handoff` | 瞬间打包当前会话的进度、得分、活跃错误和笔记路径，生成一份紧凑的交接上下文（Handoff Block），便于新会话或新 Agent 快速接管。 | `learning-protocol.md` |
-| `/sync` | 强制调用本地安全的 Python 脚本 `sync_course.py`，将当前的掌握度、Session 日志和错题本安全地同步到本地 Vault 中。 | `storage-contract.md` |
-| `/create-skill` | 元工程技能：对用户启动极简“三问协议”，在后台静默自动构建标准化技能包（创建 `SKILL.md` 骨架），并调用包校验工具自检通过后呈现预览。 | `skill-scaffolder/SKILL.md` |
+| `/handoff` | 瞬间打包当前会话的进度、得分、活跃错误和笔记路径，生成一份紧凑的交接上下文（Handoff Block），便于新会话快速恢复。 | `learning-protocol.md` |
+| `/creat` | 元工程技能：自动生成符合四大支柱规范与写保护机制的标准化 Agent 技能包结构。自动运行包合规自检。 | `skill-scaffolder/SKILL.md` |
+| `/update` | 一键自动更新：从远程仓库拉取最新的脚本代码，并覆盖升级所有已链接的技能。 | `host-capabilities.md` |
+| `/help` | 帮助指南：直接在会话中显示此帮助指南，解释所有命令与掌握度学习闭环。 | `host-capabilities.md` |
 
 ---
 

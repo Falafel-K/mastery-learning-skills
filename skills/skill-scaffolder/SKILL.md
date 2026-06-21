@@ -11,7 +11,7 @@ Automate the scaffolding of new agent skills. Enforce predictability, clear trig
 
 ## 3-Question Grilling & Frictionless Direct Generation (三问提议与免问跳过)
 
-When the user enters `/create-skill` or requests a new skill:
+When the user enters `/creat` or requests a new skill:
 1. **Proactively Evaluate and Skip (主动评估与跳过)**:
    - Before asking any questions, analyze the user's initial description and technical level.
    - If the user's description is very simple, or they appear to be a non-technical end-user who would find technical/hardcore questions (e.g., trigger commands, observable output, write directories) difficult or frustrating to answer, **the Agent MUST skip the 3-question grilling completely**.
@@ -33,7 +33,7 @@ When the user enters `/create-skill` or requests a new skill:
 2. **Create Folders and Base Templates Natively**: Use your native filesystem tools (like write, make directory, etc.) to create the folder `skills/<slugified-name>/` and create the base file `skills/<slugified-name>/SKILL.md` using the template layout defined in step 3. Do not run any external Python helper scripts to do this.
 3. **Draft the Skill Instructions**: Write the detailed instructions inside the newly created `skills/<slugified-name>/SKILL.md` file, strictly enforcing the **Four Pillars**:
    - **Pillar 1 (Invocation)**: Define clearly in YAML frontmatter whether it is User-invoked (`disable-model-invocation: true` for commands like `/my-cmd`) or Model-invoked (omit for autonomous trigger).
-   - **Pillar 2 (Degradation)**: Specify operating modes (Full Mode, Cloud Mode, Chat-only Mode) with fallback behaviors for writes and dependencies (e.g. referencing `../../docs/adr/0001-mastery-storage-soft-degradation.md`).
+   - **Pillar 2 (Degradation)**: Specify operating modes (Full Mode, Cloud Mode, Chat-only Mode) with fallback behaviors for writes and dependencies (e.g. referencing `../../docs/adr/0001-mastery-storage-soft-degradation.md`). **Always mandate a Strict File-Write Boundary (Rule 11) in the new skill, forbidding writing or creating files unless the user explicitly provides a target folder path in their prompt.**
    - **Pillar 3 (Vocabulary)**: Include a required step to load the shared vocabulary in `../../CONTEXT.md` to avoid term mismatch.
    - **Pillar 4 (Checkability)**: Define checkable, exhaustive **Completion Criteria** at the end of each step.
    - Separate ordered actions (steps) from static rules (reference).

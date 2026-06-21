@@ -15,10 +15,19 @@ The installer automatically detects active agent environments on your system and
 - **Claude Code**: `~/.claude/skills`
 - **General Fallback / Codex**: `~/.agents/skills`
 
-This registers the main program alongside dedicated sub-command router skills (`/study`, `/review`, `/dashboard`, `/sync`, `/audit`, `/handoff`, and `/help`). They will appear directly in your agent's autocomplete dropdown menu!
+This registers the main program alongside dedicated sub-command router skills (`/study`, `/review`, `/dashboard`, `/sync`, `/audit`, `/handoff`, `/help`, `/creat`, `/update`). They will appear directly in your agent's autocomplete dropdown menu!
 
-### 1. One-Line Online Installation (Recommended, no Git required)
-Copy and run the appropriate command for your system in your terminal:
+### 1. Agent-Assisted Installation (Easiest, zero terminal setup)
+If your current active agent has terminal/command execution capabilities (like Claude Code, Gemini, or Antigravity), simply paste this prompt directly into your agent chat window:
+
+```text
+Please install Mastery Learning Skills for me: if on Windows, run 'irm https://raw.githubusercontent.com/Falafel-K/mastery-learning-skills/main/install.ps1 | iex'; if on macOS/Linux, run 'curl -fsSL https://raw.githubusercontent.com/Falafel-K/mastery-learning-skills/main/install.sh | bash'.
+```
+
+The agent will automatically download and execute the installer script, setting up all skills in the background.
+
+### 2. One-Line Online Installation (Manual terminal copy)
+If you prefer to run it manually in your system terminal, run the appropriate command:
 - **macOS / Linux**:
   ```bash
   curl -fsSL https://raw.githubusercontent.com/Falafel-K/mastery-learning-skills/main/install.sh | bash
@@ -28,8 +37,12 @@ Copy and run the appropriate command for your system in your terminal:
   irm https://raw.githubusercontent.com/Falafel-K/mastery-learning-skills/main/install.ps1 | iex
   ```
 
-### 2. One-Click Uninstall (Clean removal of skills)
-To completely remove the skills and clean up the directories:
+### 3. One-Click Uninstall (Clean removal of skills)
+You can uninstall the skills by running the uninstall command directly in your agent chat:
+```text
+Please uninstall Mastery Learning Skills: if on Windows, run '& ([scriptblock]::Create((irm https://raw.githubusercontent.com/Falafel-K/mastery-learning-skills/main/install.ps1))) -Uninstall'; if on macOS/Linux, run 'curl -fsSL https://raw.githubusercontent.com/Falafel-K/mastery-learning-skills/main/install.sh | bash -s -- --uninstall'.
+```
+Or run the uninstall command manually in your system terminal:
 - **macOS / Linux**:
   ```bash
   curl -fsSL https://raw.githubusercontent.com/Falafel-K/mastery-learning-skills/main/install.sh | bash -s -- --uninstall
@@ -39,7 +52,7 @@ To completely remove the skills and clean up the directories:
   & ([scriptblock]::Create((irm https://raw.githubusercontent.com/Falafel-K/mastery-learning-skills/main/install.ps1))) -Uninstall
   ```
 
-### 3. Local Developer Installation (Clone & Symlink)
+### 4. Local Developer Installation (Clone & Symlink)
 Clone the repository and run the local installer to create live developer symlinks:
 ```bash
 git clone https://github.com/Falafel-K/mastery-learning-skills.git
@@ -66,12 +79,15 @@ If you want filesystem-backed Obsidian notes, provide a Vault path. Otherwise, t
 
 | Command | Action | Reusable Discipline |
 |---|---|---|
-| `/study [target]` / `/learn [target]` | Learning loop: teach target `[target]` (e.g. `K03`, `S1/Sec2`, or keyword) overriding default order. Defaults to the automatic next objective if omitted. | `learning-protocol.md` |
+| `/study [target]` | Learning loop: teach target `[target]` (e.g. `K03`, `S1/Sec2`, or keyword) overriding default order. Defaults to the automatic next objective if omitted. | `learning-protocol.md` |
 | `/review [target]` | Start a retrieval-based review session for a specific `[target]` (e.g. `K01`) or all overdue points if omitted. | `assessment-and-mastery.md` |
+| `/dashboard` | Display a visual mastery progress report dashboard with ASCII progress bars. | `storage-contract.md` |
+| `/sync` | Force a synchronization of files to the Vault using the secure local python tool `sync_course.py`. | `storage-contract.md` |
 | `/audit` | Perform a coverage audit: verify that every important source claim maps to an assessed Kxx point. | `learning-protocol.md` |
 | `/handoff` | Pack active session state, scores, and paths into a compact handoff block for another agent or session. | `learning-protocol.md` |
-| `/sync` | Force a synchronization of files to the Vault using the secure local python tool `sync_course.py`. | `storage-contract.md` |
-| `/create-skill` | Meta-Engineering: Grill the user with 3 questions and scaffold a new standardized agent skill folder. Runs silent validation before presenting a preview. | `skill-scaffolder/SKILL.md` |
+| `/creat` | Meta-Engineering: Scaffold a new standardized agent skill folder. Automatically runs package validation checks. | `skill-scaffolder/SKILL.md` |
+| `/update` | Auto-Update: Pull the latest script versions and update all linked skills seamlessly in one click. | `host-capabilities.md` |
+| `/help` | Help Guide: Display this guide explaining all commands and the overall Mastery Learning loop. | `host-capabilities.md` |
 
 ---
 
