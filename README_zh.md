@@ -12,8 +12,20 @@
 
 ## 快速开始（30秒上手）
 
-1. 克隆或下载本仓库。
-2. 将 `skills/mastery-learning-obsidian/` 目录复制或创建软链接（symlink）到你的 Agent 宿主的 skills 目录下。
+1. **一键在线安装（推荐，无需手动克隆或安装 Git）**：
+   在终端中复制并运行以下对应系统的命令：
+   - **macOS / Linux**:
+     ```bash
+     curl -fsSL https://raw.githubusercontent.com/Falafel-K/mastery-learning-skills/main/install.sh | bash
+     ```
+   - **Windows (PowerShell)**:
+     ```powershell
+     irm https://raw.githubusercontent.com/Falafel-K/mastery-learning-skills/main/install.ps1 | iex
+     ```
+2. **开发者本地安装（已克隆本仓库，方便改动后实时生效）**：
+   在仓库根目录下直接运行本地脚本以自动创建软链接：
+   - **macOS/Linux**: `chmod +x install.sh && ./install.sh`
+   - **Windows (PowerShell)**: `.\install.ps1`
 3. 粘贴你的学习资料，直接开启刻意学习会话：
 
 ```text

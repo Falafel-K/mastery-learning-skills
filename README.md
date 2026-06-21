@@ -12,8 +12,20 @@ These skills are designed to enforce deliberate practice, evidence-based gatekee
 
 ## Quickstart (30-second setup)
 
-1. Clone or download this repository.
-2. Copy or symlink `skills/mastery-learning-obsidian/` into your agent host's skills directory.
+1. **One-Line Online Installation (Recommended, no Git required)**:
+   Copy and run the appropriate command for your system in your terminal:
+   - **macOS / Linux**:
+     ```bash
+     curl -fsSL https://raw.githubusercontent.com/Falafel-K/mastery-learning-skills/main/install.sh | bash
+     ```
+   - **Windows (PowerShell)**:
+     ```powershell
+     irm https://raw.githubusercontent.com/Falafel-K/mastery-learning-skills/main/install.ps1 | iex
+     ```
+2. **Local Developer Installation (Clone of this repository, changes reflect instantly)**:
+   Run the local installer from the repository root directory to create symlinks:
+   - **macOS/Linux**: `chmod +x install.sh && ./install.sh`
+   - **Windows (PowerShell)**: `.\install.ps1`
 3. Start a deliberate learning session by pasting your study material:
 
 ```text

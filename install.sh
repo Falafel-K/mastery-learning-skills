@@ -1,5 +1,5 @@
 #!/bin/bash
-# Cross-platform installer shell script to link Mastery Learning Skills packages.
+# Cross-platform installer shell script to link or download Mastery Learning Skills packages.
 
 set -e
 
@@ -26,37 +26,87 @@ while [[ "$#" -gt 0 ]]; do
   shift
 done
 
-SRC_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
-
-echo "----------------------------------------"
-echo "Mastery Learning Skills Installer"
-echo "----------------------------------------"
-echo "Source directory: $SRC_DIR"
-echo "Target directory: $DEST"
-echo ""
-
 # Ensure the destination directory exists
 if [ ! -d "$DEST" ]; then
   echo "Creating directory: $DEST"
   mkdir -p "$DEST"
 fi
 
-# Create symlinks
-for skill in "mastery-learning-obsidian" "skill-scaffolder"; do
-  SKILL_SRC="$SRC_DIR/skills/$skill"
-  SKILL_DEST="$DEST/$skill"
+# Determine if running in online piped mode or local mode
+LOCAL_MODE=true
+if [ ! -f "${BASH_SOURCE[0]}" ] || [ ! -d "$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)/skills" ]; then
+  LOCAL_MODE=false
+fi
 
-  if [ -d "$SKILL_SRC" ]; then
-    echo "Linking: $skill -> $SKILL_DEST"
-    # Remove existing link/file if it exists
-    rm -rf "$SKILL_DEST"
-    ln -sf "$SKILL_SRC" "$SKILL_DEST"
+echo "----------------------------------------"
+echo "Mastery Learning Skills Installer"
+echo "----------------------------------------"
+echo "Target directory: $DEST"
+
+if [ "$LOCAL_MODE" = true ]; then
+  SRC_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+  echo "Mode: Local (Developer Symlink)"
+  echo "Source directory: $SRC_DIR"
+  echo ""
+  
+  # Create symlinks
+  for skill in "mastery-learning-obsidian" "skill-scaffolder"; do
+    SKILL_SRC="$SRC_DIR/skills/$skill"
+    SKILL_DEST="$DEST/$skill"
+
+    if [ -d "$SKILL_SRC" ]; then
+      echo "Linking: $skill -> $SKILL_DEST"
+      # Remove existing link/file if it exists
+      rm -rf "$SKILL_DEST"
+      ln -sf "$SKILL_SRC" "$SKILL_DEST"
+    else
+      echo "Warning: Source skill package not found at $SKILL_SRC"
+    fi
+  done
+else
+  echo "Mode: Online (Auto-download & Copy)"
+  echo ""
+  
+  # Create a secure temp directory
+  TEMP_DIR=$(mktemp -d -t mastery-install-XXXXXXXXXX)
+  ZIP_PATH="$TEMP_DIR/archive.zip"
+  
+  echo "Downloading latest packages from GitHub..."
+  if command -v curl >/dev/null 2>&1; then
+    curl -fsSL "https://github.com/Falafel-K/mastery-learning-skills/archive/refs/heads/main.zip" -o "$ZIP_PATH"
+  elif command -v wget >/dev/null 2>&1; then
+    wget -qO "$ZIP_PATH" "https://github.com/Falafel-K/mastery-learning-skills/archive/refs/heads/main.zip"
   else
-    echo "Warning: Source skill package not found at $SKILL_SRC"
+    echo "Error: Neither curl nor wget was found. Cannot download packages." >&2
+    exit 1
   fi
-done
+  
+  echo "Extracting packages..."
+  if command -v unzip >/dev/null 2>&1; then
+    unzip -q "$ZIP_PATH" -d "$TEMP_DIR"
+  else
+    echo "Error: unzip command was not found. Please install unzip first." >&2
+    exit 1
+  fi
+  
+  EXTRACTED_DIR="$TEMP_DIR/mastery-learning-skills-main"
+  for skill in "mastery-learning-obsidian" "skill-scaffolder"; do
+    SKILL_SRC="$EXTRACTED_DIR/skills/$skill"
+    SKILL_DEST="$DEST/$skill"
+    if [ -d "$SKILL_SRC" ]; then
+      echo "Copying: $skill -> $SKILL_DEST"
+      rm -rf "$SKILL_DEST"
+      cp -r "$SKILL_SRC" "$SKILL_DEST"
+    else
+      echo "Warning: Package $skill not found in archive."
+    fi
+  done
+  
+  # Cleanup temp directory
+  rm -rf "$TEMP_DIR"
+fi
 
 echo ""
-echo "Successfully linked Mastery Learning Skills!"
+echo "Successfully installed Mastery Learning Skills!"
 echo "You can now use these skills in your Agent workspace."
 echo "----------------------------------------"
