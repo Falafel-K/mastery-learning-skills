@@ -46,7 +46,7 @@ Once the details are gathered or inferred, execute these steps:
 
 3. **Draft the Skill Instructions** in `skills/<slugified-name>/SKILL.md`, strictly enforcing the **Four Pillars**:
    - **Pillar 1 (Invocation)**: Define in YAML frontmatter whether it is User-invoked (slash command, manual trigger) or Model-invoked (autonomous, AI-triggered). User-invoked commands must be clearly labeled.
-   - **Pillar 2 (Degradation)**: Specify operating modes (Full Mode → local writes; Chat-only Mode → preview + handoff). **Mandate Rule 11 (Strict File-Write Boundary) in the new skill** — no writes unless user explicitly provides a path.
+   - **Pillar 2 (Degradation)**: Specify operating modes (Full Mode → local writes; Chat-only Mode → preview + handoff). **Mandate Rule 11 (Strict File-Write Boundary) in the new skill** — no writes unless user explicitly provides a path. Reference `../../docs/adr/0001-mastery-storage-soft-degradation.md` for fallback behavior specs.
    - **Pillar 3 (Vocabulary)**: Include a required step to load the shared vocabulary in `../../CONTEXT.md` to avoid term mismatch.
    - **Pillar 4 (Checkability)**: Define checkable, exhaustive **Completion Criteria** at the end. Separate ordered actions (steps) from static rules (reference).
 

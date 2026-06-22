@@ -2,13 +2,100 @@
 
 > English | [简体中文](./README_zh.md)
 
-An interactive Mastery Learning skill package for agent hosts, integrated with Obsidian vault storage.
+**Turn AI conversations into durable knowledge through evidence-based learning.**
 
-This package enforces **deliberate practice**, **evidence-based progression gates**, and **structured note archiving**. It is fully compatible with Claude Code and other agent hosts supporting Markdown-based skill protocols. It focuses on diagnosing and reinforcing learner capability, compiling learning history into structured Obsidian notes rather than bloated chat transcripts.
+Mastery Learning Skills is an interactive learning system for AI agents that enforces **deliberate practice**, **progression gates**, and **structured note archiving**. Unlike passive Q&A, it requires you to demonstrate understanding through recall, application, and error correction before moving forward—then preserves your learning progress in organized Obsidian notes.
+
+### Why This Exists
+
+When learning with AI, three problems emerge:
+1. **Illusion of understanding**: You read an explanation and feel like you "got it," but can't apply it later
+2. **No retention**: Chat logs vanish, and you restart from scratch each session
+3. **No accountability**: The AI keeps explaining without verifying you actually learned
+
+This system solves these by treating learning as **a process with gates, evidence, and memory**—not just information transfer.
+
+### What You Get
+
+- **Evidence-based progression**: No advancement without demonstration (0-5 mastery scoring)
+- **Spaced retrieval practice**: Automatic review scheduling for long-term retention
+- **Structured knowledge archives**: Clean Obsidian notes, not messy chat logs
+- **Cross-session continuity**: Pick up exactly where you left off, even in new conversations
+- **Subject-aware tutoring**: Specialized adapters for mathematics, programming, science, and more
 
 ---
 
-## Quickstart (30-second setup)
+## Who Is This For?
+
+### ✅ Good Fit
+- Learning structured knowledge (mathematics, programming, science, technical skills)
+- Have specific study materials (textbooks, documentation, course notes)
+- Want long-term retention, not quick answers
+- Comfortable with AI-assisted interactive learning
+
+### ❌ Not Ideal For
+- Quick fact lookups (use regular chat instead)
+- Unstructured exploration or brainstorming
+- Learning purely procedural skills without concepts
+- Users uncomfortable with being "tested" by AI
+
+---
+
+## Three Ways to Use This
+
+### 🚀 Path 1: Quick Trial (No Installation)
+
+**Best for**: First-time users who want to see how it works
+
+Just paste this into any compatible AI agent:
+
+```text
+Use mastery-learning-obsidian to teach me Python list comprehensions.
+Treat this as a preview—don't write any files.
+
+Material:
+List comprehensions provide a concise way to create lists.
+Basic syntax: [expression for item in iterable if condition]
+Example: squares = [x**2 for x in range(10)]
+```
+
+The agent will:
+1. Break down the concept into knowledge points
+2. Teach each point interactively
+3. Test your understanding before moving forward
+4. Output structured Markdown you can copy-paste
+
+**No installation. No file writes. Pure learning loop.**
+
+### 📚 Path 2: Full System (With Obsidian)
+
+**Best for**: Serious learners who want durable notes and spaced repetition
+
+Install the skills, provide an Obsidian vault path, and get:
+- Automatic note organization (knowledge maps, mastery ledger, error logs)
+- Cross-session state preservation
+- Spaced review scheduling
+- Complete audit trails
+
+→ See [Installation Guide](./docs/installation.md) for setup
+
+### 🔧 Path 3: Development & Contribution
+
+**Best for**: Contributors, researchers, or those customizing workflows
+
+Clone the repo, symlink for live reloading, run validations:
+
+```bash
+git clone https://github.com/Falafel-K/mastery-learning-skills.git
+cd mastery-learning-skills
+./install.sh  # or .\install.ps1 on Windows
+```
+
+→ See [CONTRIBUTING.md](./CONTRIBUTING.md) and [AGENTS.md](./AGENTS.md)
+
+---
+
+## Quickstart (30-second installation)
 
 The installer automatically detects active agent environments on your system and links/copies the skills to all of them:
 - **Google Gemini / Antigravity**: `~/.gemini/config/skills`
@@ -73,24 +160,6 @@ Use mastery-learning-obsidian to learn from the material below:
 
 If you want filesystem-backed Obsidian notes, provide a Vault path. Otherwise, the skill runs in **Preview mode** and outputs copy-pasteable Markdown.
 
----
-
-## Reference
-
-| Command | Action | Reusable Discipline |
-|---|---|---|
-| `/study [target]` | Learning loop: teach target `[target]` (e.g. `K03`, `S1/Sec2`, or keyword) overriding default order. Defaults to the automatic next objective if omitted. | `learning-protocol.md` |
-| `/review [target]` | Start a retrieval-based review session for a specific `[target]` (e.g. `K01`) or all overdue points if omitted. | `assessment-and-mastery.md` |
-| `/dashboard` | Display a visual mastery progress report dashboard with ASCII progress bars. | `storage-contract.md` |
-| `/sync` | Force a synchronization of files to the Vault using the secure local python tool `sync_course.py`. | `storage-contract.md` |
-| `/audit` | Perform a coverage audit: verify that every important source claim maps to an assessed Kxx point. | `learning-protocol.md` |
-| `/handoff` | Pack active session state, scores, and paths into a compact handoff block for another agent or session. | `learning-protocol.md` |
-| `/creat` | Meta-Engineering: Scaffold a new standardized agent skill folder. Automatically runs package validation checks. | `skill-scaffolder/SKILL.md` |
-| `/update` | Auto-Update: Pull the latest script versions and update all linked skills seamlessly in one click. | `host-capabilities.md` |
-| `/help` | Help Guide: Display this guide explaining all commands and the overall Mastery Learning loop. | `host-capabilities.md` |
-
----
-
 ## Design Goals & Key Features
 
 This package addresses 5 common failure modes when learning with LLMs:
@@ -101,16 +170,42 @@ This package addresses 5 common failure modes when learning with LLMs:
 4. **Clean Archive over Chat logs**: Direct chat backups create noise. We enforce a **Storage Contract**, writing only in designated `AI-MANAGED` blocks within Obsidian notes, preserving your custom hand-written files.
 5. **Session Recovery via Markdown**: Chat limits erase context. We treat local **Mastery Ledger** markdown files as the single source of truth, enabling instant state restoration across sessions.
 
+→ See [docs/architecture.md](./docs/architecture.md) for technical details
+
 ---
 
-## Four Pillars Architecture
+## Command Reference
 
-This project adopts a highly robust, portable, and flexible agent skill design paradigm consisting of four core pillars:
+| Command | Action | Documentation |
+|---|---|---|
+| `/study [target]` | Learning loop: teach target `[target]` or automatic next objective | [learning-protocol.md](./skills/mastery-learning-obsidian/references/learning-protocol.md) |
+| `/review [target]` | Retrieval-based review for specific or overdue knowledge points | [assessment-and-mastery.md](./skills/mastery-learning-obsidian/references/assessment-and-mastery.md) |
+| `/dashboard` | Visual progress report with ASCII progress bars | [storage-contract.md](./skills/mastery-learning-obsidian/references/storage-contract.md) |
+| `/sync` | Force synchronization to Vault using local Python tool | [storage-contract.md](./skills/mastery-learning-obsidian/references/storage-contract.md) |
+| `/audit` | Coverage audit: verify all source material is assessed | [learning-protocol.md](./skills/mastery-learning-obsidian/references/learning-protocol.md) |
+| `/handoff` | Pack session state for handoff to another agent/session | [learning-protocol.md](./skills/mastery-learning-obsidian/references/learning-protocol.md) |
+| `/creat` | Meta-engineering: scaffold a new standardized agent skill | [skill-scaffolder/SKILL.md](./skills/skill-scaffolder/SKILL.md) |
+| `/update` | Auto-update: pull latest versions and update all linked skills | [host-capabilities.md](./skills/mastery-learning-obsidian/references/host-capabilities.md) |
+| `/help` | Display help guide for all commands | [host-capabilities.md](./skills/mastery-learning-obsidian/references/host-capabilities.md) |
 
-1. **Trigger & Invocation Paradigm** (触发与调用隔离): Separates user-entered slash commands (User-invoked, like `/study` and `/review`) from autonomous routines (Model-invoked, like `mastery-assessment` and `learning-repair`) to keep the user in control and prevent accidental prompts. See [docs/invocation.md](./docs/invocation.md).
-2. **Soft Degradation Decoupling** (存储软降级): decoupled pedagogical scoring from direct file writes. Enables smooth fallbacks across `Full mode` (local writes), `Cloud mode` (Notion/Feishu patches), and `Chat-only mode` (memory + handoff blocks). See [docs/adr/0001-mastery-storage-soft-degradation.md](./docs/adr/0001-mastery-storage-soft-degradation.md).
-3. **Vocabulary Alignment** (术语统一对齐): Enforces a strict vocabulary filter using [CONTEXT.md](./CONTEXT.md) to ensure consistent AI phrasing and eliminate terminology confusion.
-4. **Linking Ecosystem & Scaffolding** (自动链接与脚手架): Provides fast symlinking via `install.ps1`/`install.sh` for development reloading, and extends `skill-scaffolder` to automatically generate new skills complying with these pillars.
+---
+
+## Documentation
+
+**Getting Started**
+- [Quick Start Guide](./docs/quickstart.md) - 5-minute walkthrough
+- [Installation Guide](./docs/installation.md) - Detailed setup for all platforms
+- [FAQ](./docs/faq.md) - Common questions and answers
+- [Troubleshooting](./docs/troubleshooting.md) - Solutions to common issues
+
+**Core Concepts**
+- [Architecture](./docs/architecture.md) - System design and philosophy
+- [Agent Compatibility](./docs/agent-compatibility.md) - Supported AI agents
+- [Authoring Guide](./docs/authoring-guide.md) - For contributors
+
+**Examples**
+- [Python File I/O](./examples/python-demo-vault/) - Complete learning workflow example
+- [More Examples](./examples/README.md) - Additional subject demonstrations
 
 ---
 

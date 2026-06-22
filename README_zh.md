@@ -2,9 +2,96 @@
 
 > [English](./README.md) | 简体中文
 
-基于 Obsidian 笔记库与 Agent 交互的掌握度学习 (Mastery Learning) 技能插件。
+**将 AI 对话转化为持久知识，通过证据驱动的学习方式。**
 
-本技能包专为**刻意练习**、**证据驱动的进度门禁**以及**结构化笔记归档**而设计，原生兼容 Claude Code 等支持 Markdown 技能协议的 AI 代理宿主。其核心目标是通过交互式评估与诊断，将学习内容沉淀为持久的 Obsidian Markdown 笔记，而非生成无序的聊天对话记录。
+Mastery Learning Skills 是一个面向 AI 智能体的交互式学习系统，强制执行**刻意练习**、**进度门禁**和**结构化笔记归档**。与被动问答不同，它要求你通过回忆、应用和纠错来证明理解——然后将学习进度保存为有序的 Obsidian 笔记。
+
+### 为什么需要这个工具
+
+用 AI 学习时，会遇到三个问题：
+1. **理解错觉**：读完解释觉得"懂了"，实际应用时发现不会
+2. **无法留存**：聊天记录消失，每次都要从头开始
+3. **无法验证**：AI 只管讲解，不验证你是否真的学会
+
+本系统通过**设置门槛、要求证据、保存记忆**来解决这些问题——学习不只是信息传递，而是一个有过程的系统。
+
+### 你将获得
+
+- **基于证据的进度控制**：没有证明理解就无法前进（0-5 分掌握度评分）
+- **间隔检索练习**：自动安排复习，实现长期记忆
+- **结构化知识档案**：清晰的 Obsidian 笔记，而非混乱的聊天记录
+- **跨会话连续性**：即使在新对话中，也能准确恢复上次进度
+- **学科适配教学**：针对数学、编程、科学等提供专门的教学适配器
+
+---
+
+## 适合谁使用？
+
+### ✅ 适合场景
+- 学习结构化知识（数学、编程、科学、技术技能）
+- 有明确的学习材料（教材、文档、课程笔记）
+- 追求长期记忆，而非快速查询
+- 愿意接受 AI 辅助的交互式学习
+
+### ❌ 不太适合
+- 快速查询事实（直接用普通对话更好）
+- 无结构的探索或头脑风暴
+- 学习纯粹的程序性技能（无概念的操作步骤）
+- 不适应被 AI "测试"的用户
+
+---
+
+## 三种使用方式
+
+### 🚀 路径 1：快速试用（无需安装）
+
+**适合人群**：首次使用，想先看看效果
+
+直接在任意兼容的 AI 智能体中粘贴：
+
+```text
+Use mastery-learning-obsidian to teach me Python list comprehensions.
+Treat this as a preview—don't write any files.
+
+Material:
+List comprehensions provide a concise way to create lists.
+Basic syntax: [expression for item in iterable if condition]
+Example: squares = [x**2 for x in range(10)]
+```
+
+智能体将会：
+1. 将概念拆分为知识点
+2. 交互式教学每个知识点
+3. 在前进前测试你的理解
+4. 输出可复制粘贴的结构化 Markdown
+
+**无需安装。不写文件。纯粹的学习循环。**
+
+### 📚 路径 2：完整系统（配合 Obsidian）
+
+**适合人群**：认真学习者，想要持久笔记和间隔复习
+
+安装技能包，提供 Obsidian 库路径，即可获得：
+- 自动笔记组织（知识地图、掌握度账本、错题日志）
+- 跨会话状态保存
+- 间隔复习调度
+- 完整的审计轨迹
+
+→ 查看[安装指南](./docs/installation.md)进行设置
+
+### 🔧 路径 3：开发与贡献
+
+**适合人群**：贡献者、研究人员或自定义工作流的用户
+
+克隆仓库，创建软链接实现实时重载，运行验证：
+
+```bash
+git clone https://github.com/Falafel-K/mastery-learning-skills.git
+cd mastery-learning-skills
+./install.sh  # Windows 使用 .\install.ps1
+```
+
+→ 查看 [CONTRIBUTING.md](./CONTRIBUTING.md) 和 [AGENTS.md](./AGENTS.md)
 
 ---
 
